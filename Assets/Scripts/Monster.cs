@@ -32,18 +32,21 @@ public class Monster : MonoBehaviour
 
         state = State.IDLE;
         StartCoroutine(StateMachine());
+        Debug.Log("0번");
     }
 
     IEnumerator StateMachine()
     {
         while (Data.HP > 0)
         {
+            Debug.Log("1번");
             yield return StartCoroutine(state.ToString());
         }
     }
 
     IEnumerator IDLE()
     {
+        Debug.Log("정지");
         // 현재 animator 상태정보 얻기
         var curAnimStateInfo = Animator.GetCurrentAnimatorStateInfo(0);
 
