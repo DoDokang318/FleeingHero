@@ -69,6 +69,7 @@ public class Monster : MonoBehaviour
 
     IEnumerator CHASE()
     {
+        Debug.Log("Ã£´Ù");
         var curAnimStateInfo = Animator.GetCurrentAnimatorStateInfo(0);
 
         if (curAnimStateInfo.IsName("WalkFWD") == false)
