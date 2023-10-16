@@ -15,8 +15,6 @@ public class Monster : MonoBehaviour
     private Transform target; // 타겟 즉 플레이어
     public float lostDistance; // 추격 중지 거리
 
-
-
     public enum State  // 상태
     {
         IDLE,

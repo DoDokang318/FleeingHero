@@ -1,18 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class MonsterAnimation : MonoBehaviour
+[Serializable]
+public class MonsterAnimation
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private string idleParameterName = "Idle";
+    [SerializeField] private string walkParameterName = "Walk";
+    [SerializeField] private string runParameterName = "Run";
+    [SerializeField] private string attackParameterName = "Attack";
 
-    // Update is called once per frame
-    void Update()
+    public int IdleParmaeterHash { get; private set; }
+    public int WalkParameterHash { get; private set; }
+    public int RunParameterHash { get; private set; }
+
+    public int AttackParameterName { get; private set; }
+
+    public void Initialize()
     {
-        
+        IdleParmaeterHash = Animator.StringToHash(idleParameterName);
+        WalkParameterHash = Animator.StringToHash(walkParameterName);
+        RunParameterHash = Animator.StringToHash(runParameterName);
+        AttackParameterName = Animator.StringToHash(attackParameterName);
     }
 }
