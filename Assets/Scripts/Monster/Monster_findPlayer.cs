@@ -15,14 +15,16 @@ public class Monster_findPlayer : MonoBehaviour
     [SerializeField] float ViewRadius = 1f;
     [SerializeField] LayerMask TargetMask;
     [SerializeField] LayerMask ObstacleMask;
-
+    
     List<Collider> hitTargetList = new List<Collider>();
 
-    public Monster monster;
+    public Monster monster { get; private set; }
+    public Attack attack { get; private set; }
     // Start is called before the first frame update
     void Start()
     {
-        
+        monster = GetComponent<Monster>();
+        attack = GetComponent<Attack>();
     }
 
     // Update is called once per frame
@@ -63,7 +65,8 @@ public class Monster_findPlayer : MonoBehaviour
             {
                 hitTargetList.Add(EnemyColli);
                 if (DebugMode) Debug.DrawLine(myPos, targetPos, Color.red);
-                monster.Player_find(EnemyColli.transform);
+                attack.tagetColl(EnemyColli);
+                monster.Player_find(EnemyColli);
             }
         }
 
