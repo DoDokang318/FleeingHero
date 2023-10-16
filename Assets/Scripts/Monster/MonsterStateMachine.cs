@@ -14,7 +14,7 @@ public class MonsterStateMachine : StateMachine
     public MonsterStateMachine(Monster monster)
     {
         Monster = monster;
-        Target = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerConditions>();
+        //Target = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerConditions>();
 
         IdleState = new MonsterIdle(this);
         AttackState = new MonsterAttack(this);

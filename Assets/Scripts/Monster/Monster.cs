@@ -8,7 +8,7 @@ using UnityEditor;
 public class Monster : MonoBehaviour
 {
     [field: SerializeField] public MonsterData Data { get; private set; }  // 적 기본 데이터
-    [field: SerializeField] public MonsterAnimation AnimationData { get; private set; }  // 적 기본 데이터
+   [field: SerializeField] public MonsterAnimation AnimationData { get; private set; }  // 적 기본 데이터
 
     public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
@@ -60,15 +60,15 @@ public class Monster : MonoBehaviour
        // Debug.Log("정지");
         // 현재 animator 상태정보 얻기
         var curAnimStateInfo = Animator.GetCurrentAnimatorStateInfo(0);
-
+        
         // 애니메이션 이름이 IdleNormal 이 아니면 Play
-        if (curAnimStateInfo.IsName("IdleNormal") == false)
-            Animator.Play("IdleNormal", 0, 0);
-
+        if (curAnimStateInfo.IsName("Z_Idle") == false)
+            Animator.Play("Z_Idle", 0, 0);
+        
         // 몬스터가 Idle 상태일 때 두리번 거리게 하는 코드
         // 50% 확률로 좌/우로 돌아 보기
         int dir = Random.Range(0f, 1f) > 0.5f ? 1 : -1;
-        //dir = 0;// 임시
+        dir = 0;// 임시
 
         // 회전 속도 설정
         float lookSpeed = Random.Range(25f, 40f);
@@ -84,12 +84,11 @@ public class Monster : MonoBehaviour
 
     IEnumerator CHASE() // 수정
     {
-        Debug.Log("찾다");
         var curAnimStateInfo = Animator.GetCurrentAnimatorStateInfo(0);
 
-        if (curAnimStateInfo.IsName("WalkFWD") == false)
+        if (curAnimStateInfo.IsName("Z_Run_InPlace") == false)
         {
-            Animator.Play("WalkFWD", 0, 0);
+            Animator.Play("Z_Run_InPlace", 0, 0);
             // SetDestination 을 위해 한 frame을 넘기기위한 코드
             yield return null;
         }
@@ -122,7 +121,7 @@ public class Monster : MonoBehaviour
 
         // 공격 애니메이션은 공격 후 Idle Battle 로 이동하기 때문에 
         // 코드가 이 지점에 오면 무조건 Attack01 을 Play
-        Animator.Play("Attack01", 0, 0);
+        Animator.Play("Z_Attack", 0, 0);
 
         // 거리가 멀어지면
         if (nmAgent.remainingDistance > nmAgent.stoppingDistance)
