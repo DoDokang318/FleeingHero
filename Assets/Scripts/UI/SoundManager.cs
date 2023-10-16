@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public AudioSource Musicsource;
-    public Slider slider;
-    public GameObject imageObject; 
+    [SerializeField] private AudioSource Musicsource;
+    [SerializeField] private Slider slider;
+    [SerializeField] private GameObject imageObject; 
     
 
     public void SetMusicVolume(float volume)
