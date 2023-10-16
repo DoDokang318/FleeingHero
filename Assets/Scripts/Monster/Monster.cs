@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Threading;
 using static UnityEngine.GraphicsBuffer;
-using UnityEditor;
 
 public class Monster : MonoBehaviour
 {
@@ -12,6 +12,7 @@ public class Monster : MonoBehaviour
 
     public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
+    public Attack attack { get; private set; }
 
     private NavMeshAgent nmAgent; // 네비게이션
     private Transform target; // 타겟 즉 플레이어
@@ -39,6 +40,7 @@ public class Monster : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody>();
         Animator = GetComponentInChildren<Animator>();
         nmAgent = GetComponent<NavMeshAgent>();
+        attack = GetComponent<Attack>();
 
         state = State.IDLE;
         StartCoroutine(StateMachine());
@@ -57,18 +59,25 @@ public class Monster : MonoBehaviour
 
     IEnumerator IDLE()
     {
-       // Debug.Log("정지");
+        Animator.SetBool("Idle", true);
+        Animator.SetBool("Run", false);
+        Animator.SetBool("Attack", false);
+        Animator.SetBool("Idle", false);
+
+        nmAgent.velocity = Vector3.zero;
+        nmAgent.isStopped = true;
+        // Debug.Log("정지");
         // 현재 animator 상태정보 얻기
         var curAnimStateInfo = Animator.GetCurrentAnimatorStateInfo(0);
         
-        // 애니메이션 이름이 IdleNormal 이 아니면 Play
-        if (curAnimStateInfo.IsName("Z_Idle") == false)
-            Animator.Play("Z_Idle", 0, 0);
+        //// 애니메이션 이름이 IdleNormal 이 아니면 Play
+        //if (curAnimStateInfo.IsName("Z_Idle") == false)
+        //    Animator.Play("Z_Idle", 0, 0);
         
         // 몬스터가 Idle 상태일 때 두리번 거리게 하는 코드
         // 50% 확률로 좌/우로 돌아 보기
         int dir = Random.Range(0f, 1f) > 0.5f ? 1 : -1;
-        dir = 0;// 임시
+        //dir = 0;// 임시
 
         // 회전 속도 설정
         float lookSpeed = Random.Range(25f, 40f);
@@ -86,22 +95,33 @@ public class Monster : MonoBehaviour
     {
         var curAnimStateInfo = Animator.GetCurrentAnimatorStateInfo(0);
 
-        if (curAnimStateInfo.IsName("Z_Run_InPlace") == false)
-        {
-            Animator.Play("Z_Run_InPlace", 0, 0);
-            // SetDestination 을 위해 한 frame을 넘기기위한 코드
-            yield return null;
-        }
+        Animator.SetBool("Idle", false);
+        Animator.SetBool("Run", true);
+        Animator.SetBool("Attack", false);
+        Animator.SetBool("Idle", false);
+
+        nmAgent.velocity = Vector3.zero;
+        nmAgent.isStopped = false;
+        //if (curAnimStateInfo.IsName("Z_Run_InPlace") == false)
+        //{
+        //    Animator.Play("Z_Run_InPlace", 0, 0);
+        //    // SetDestination 을 위해 한 frame을 넘기기위한 코드
+        //    yield return null;
+        //}
 
         // 목표까지의 남은 거리가 멈추는 지점보다 작거나 같으면
         if (nmAgent.remainingDistance <= nmAgent.stoppingDistance)
         {
+            Animator.SetBool("Run", false);
+            Animator.SetBool("Attack", true);
             // StateMachine 을 공격으로 변경
             ChangeState(State.ATTACK);
         }
         // 목표와의 거리가 멀어진 경우
         else if (nmAgent.remainingDistance > lostDistance)
         {
+            Animator.SetBool("Idle", true);
+            Animator.SetBool("Run", false);
             target = null;
             nmAgent.SetDestination(transform.position);
             yield return null;
@@ -117,22 +137,39 @@ public class Monster : MonoBehaviour
 
     IEnumerator ATTACK()
     {
-        var curAnimStateInfo = Animator.GetCurrentAnimatorStateInfo(0);
+        //가속 제거
+        nmAgent.velocity = Vector3.zero;
+        nmAgent.isStopped = true;
+        
+        Animator.SetBool("Idle", false);
+        Animator.SetBool("Run", false);
+        Animator.SetBool("Attack", true);
+        Animator.SetBool("Idle", false);
 
         // 공격 애니메이션은 공격 후 Idle Battle 로 이동하기 때문에 
         // 코드가 이 지점에 오면 무조건 Attack01 을 Play
-        Animator.Play("Z_Attack", 0, 0);
+        //var curAnimStateInfo = Animator.GetCurrentAnimatorStateInfo(0);
+        //Animator.Play("Z_Attack", 0, 0);
 
         // 거리가 멀어지면
         if (nmAgent.remainingDistance > nmAgent.stoppingDistance)
         {
+            attack.RePosition();
+            Animator.SetBool("Run", true);
+            Animator.SetBool("Attack", false);
             // StateMachine을 추적으로 변경
             ChangeState(State.CHASE);
         }
         else
-            // 공격 animation 의 두 배만큼 대기
-            // 이 대기 시간을 이용해 공격 간격을 조절할 수 있음.
-            yield return new WaitForSeconds(curAnimStateInfo.length * 2f);
+        {
+            attack.RePosition();
+            attack.damage();
+            yield return new WaitForSeconds(4f);
+        }
+        // 공격 animation 의 두 배만큼 대기
+        // 이 대기 시간을 이용해 공격 간격을 조절할 수 있음.
+
+        yield return null;
     }
 
     IEnumerator KILLED()
@@ -144,21 +181,11 @@ public class Monster : MonoBehaviour
     {
         state = newState;
     }
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.name != "player") return;
-    //    // sphere collider 가 player 를 감지하면      
-    //    target = other.transform;
-    //    // navmeshagent의 목표를 player 로 설정
-    //    nmAgent.SetDestination(target.position);
-    //    // StateMachine을 추적으로 변경
-    //    ChangeState(State.CHASE);
-    //}
 
-    public void Player_find(Transform other)
+    //플레이어를 찾았다.
+    public void Player_find(Collider other)
     {
-        Debug.Log("들어옴");
-        target = other;
+        target = other.transform;
         nmAgent.SetDestination(target.position);
         // StateMachine을 추적으로 변경
         ChangeState(State.CHASE);
@@ -172,4 +199,16 @@ public class Monster : MonoBehaviour
         nmAgent.SetDestination(target.position);
 
     }
+
+    // 콜라이더 충돌 효과 안씀
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.name != "player") return;
+    //    // sphere collider 가 player 를 감지하면      
+    //    target = other.transform;
+    //    // navmeshagent의 목표를 player 로 설정
+    //    nmAgent.SetDestination(target.position);
+    //    // StateMachine을 추적으로 변경
+    //    ChangeState(State.CHASE);
+    //}
 }

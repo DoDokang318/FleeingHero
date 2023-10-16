@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1350536195257651547}
   - component: {fileID: 8617718212844774622}
   - component: {fileID: 2778234396604939379}
+  - component: {fileID: 5122719513095692886}
   m_Layer: 0
   m_Name: Monster(ScriptsTEST)
   m_TagString: Untagged
@@ -35,7 +36,7 @@ Transform:
   m_Children:
   - {fileID: 6303171841074614598}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &3357451155123109766
 CapsuleCollider:
@@ -85,7 +86,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!195 &1350536195257651547
 NavMeshAgent:
@@ -101,7 +102,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1.5
+  m_StoppingDistance: 2.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -127,7 +128,7 @@ MonoBehaviour:
     walkParameterName: Walk
     runParameterName: Run
     attackParameterName: Attack
-  lostDistance: 10
+  lostDistance: 15
   state: 0
 --- !u!114 &2778234396604939379
 MonoBehaviour:
@@ -143,7 +144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DebugMode: 1
   ViewAngle: 75
-  ViewRadius: 10
+  ViewRadius: 15
   TargetMask:
     serializedVersion: 2
     m_Bits: 256
@@ -151,6 +152,20 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   monster: {fileID: 8617718212844774622}
+--- !u!114 &5122719513095692886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339106760563250296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e3336fe4ddc9fe40a28af8bf0894d01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 6303171841074614598}
+  body: {fileID: 9084996555262252732}
 --- !u!1001 &6881380607958715701
 PrefabInstance:
   m_ObjectHideFlags: 0
