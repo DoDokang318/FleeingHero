@@ -22,7 +22,7 @@ public class MonsterBaseState : IState
 
     protected void StartAnimation(int animationHash)
     {
-        stateMachine.Monster.Animator.SetBool(animationHash, true);
+        //stateMachine.Monster.Animator.SetBool(animationHash, true);
     }
     protected void StopAnimation(int animationHash)
     {
