@@ -123,6 +123,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Data>k__BackingField: {fileID: 11400000, guid: 8f4ab6edf0fab734985b02d0b9325070, type: 2}
+  <AnimationData>k__BackingField:
+    idleParameterName: Idle
+    walkParameterName: Walk
+    runParameterName: Run
+    attackParameterName: Attack
   lostDistance: 10
   state: 0
 --- !u!195 &233674526211035865
@@ -207,9 +212,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c58475052dfb1a14db4b59e5615fa4e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_angle: 45
-  m_distance: 10
-  m_layerMask:
+  DebugMode: 1
+  ViewAngle: 75
+  ViewRadius: 10
+  TargetMask:
     serializedVersion: 2
     m_Bits: 256
+  ObstacleMask:
+    serializedVersion: 2
+    m_Bits: 0
   monster: {fileID: 1062248930475682595}
