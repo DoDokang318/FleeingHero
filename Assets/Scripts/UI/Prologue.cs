@@ -23,7 +23,7 @@ public class Prologue : MonoBehaviour
 
     private IEnumerator PlayPrologue()
     {
-        string prologueMessage = "테스트1 타이핑 확인 ";
+        string prologueMessage = "옛날 옛적, 세상을 구하기 위해 모험을 떠난 용사 " ;
 
         for (int i = 0; i < prologueMessage.Length; i++)
         {
