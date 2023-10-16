@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,17 +12,35 @@ public class PlayerController : MonoBehaviour
     private Vector2 curMovementInput;
     public float jumpForce;
     public LayerMask groundLayerMask;
-    bool Run;
+    public bool IsRun;
+    public bool IsStamina;
+     Vector3 startScale = new Vector3(1f, 0.5f, 1f); // 시작 스케일
+     Vector3 endScale  = new Vector3(1f,1f,1f);   // 앉았을 때의 목표 스케일
+
+    public float SitTime = 0.2f;
+
 
     [Header("Look")]
+    [SerializeField]  private Camera PlayerCamera;
     public Transform cameraContainer;
     public float minXLook;
     public float maxXLook;
     private float camCurXRot;
     public float lookSensitivity;
-
-   
     private Vector2 mouseDelta;
+
+    [SerializeField] private bool canUseHeadbob = true;
+
+    [Header("HeadBobParameters")]
+    [SerializeField] private float walkBobSpeed = 14f;
+    [SerializeField] private float walkBobAmount = 0.05f;
+    [SerializeField] private float sprintBobSpeed = 18f;
+    [SerializeField] private float sprintBobAmount = 0.11f;
+
+    private float defaultYpos = 0;
+    private float timer;
+
+
 
     [HideInInspector]
     public bool canLook = true;
@@ -39,6 +58,8 @@ public class PlayerController : MonoBehaviour
     {
         instance = this;
         _rigidbody = GetComponent<Rigidbody>();
+        defaultYpos = PlayerCamera.transform.localPosition.y;
+
     }
     void Start()
     {
@@ -58,18 +79,44 @@ public class PlayerController : MonoBehaviour
         {
             CameraLook();
         }
+
+       
     }
 
+    private void Update()
+    {
+        if (canUseHeadbob)
+        {
+            HandleHeadbob();
+        }
+    }
 
+    private void HandleHeadbob()
+    {
+        Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
+        if (IsGrounded()==false)
+        {
+            return;
+        }
+       if(Math.Abs(dir.x) > 0.1f|| Math.Abs(dir.z) > 0.1f)
+        {
+            timer = Time.deltaTime * (IsRun ? sprintBobSpeed : walkBobSpeed);
+            PlayerCamera.transform.localPosition = new Vector3(
+                PlayerCamera.transform.localPosition.x,
+                (float)(defaultYpos + Math.Sin(timer) *(IsRun ? sprintBobAmount : walkBobAmount)),
+                PlayerCamera.transform.localPosition.z);
+        }
+
+    }
 
     private void Move()
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        if(Run == true)
+        if(IsRun == true&&IsStamina == true)
         {
             dir = moveSpeed*RunSpeed*dir;
         }
-        else
+        else 
         {
             dir *= moveSpeed;
         }
@@ -110,31 +157,43 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            Run = true;
-          
-
+            IsRun = true;         
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
-            Run = false;
-          
+            IsRun = false;          
         }
     }
     public void SitdownInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            moveSpeed /= 2;
-            transform.localScale = new Vector3(1f, 0.5f, 1f);
-
+            moveSpeed /= 2; // 이동 속도를 줄이는 예
+            StartCoroutine(ScaleOverTime(startScale, SitTime)); // 스케일을 endScale로 부드럽게 변경
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
-
-            moveSpeed *= 2;
-            transform.localScale = new Vector3(1f, 1f, 1f);
+            moveSpeed *= 2; // 이동 속도를 다시 복구하는 예
+            StartCoroutine(ScaleOverTime(endScale, SitTime)); // 스케일을 startScale로 부드럽게 변경
         }
     }
+
+    private IEnumerator ScaleOverTime(Vector3 targetScale, float duration)
+    {
+        Vector3 initialScale = transform.localScale;
+        float startTime = Time.time;
+
+        while (Time.time - startTime < duration)
+        {
+            float t = (Time.time - startTime) / duration;
+            transform.localScale = Vector3.Lerp(initialScale, targetScale, t);
+            yield return null;
+        }
+
+        // 스케일 설정을 완료한 후 정확한 값을 설정
+        transform.localScale = targetScale;
+    }
+
     public void OnFlashput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
