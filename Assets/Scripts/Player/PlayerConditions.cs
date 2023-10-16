@@ -37,19 +37,24 @@ public class PlayerConditions : MonoBehaviour
     public Condition health;
     public Condition stamina;
     public UnityEvent onTakeDamage;
-
+    public ParticleSystem HPParticle;
+ 
 
 
     void Start()
     {
         health.curValue = health.startValue;      
         stamina.curValue = stamina.startValue;
+        
     }
     void Update()
     {
-      
+        var settings = HPParticle;
+        var main = settings.main;
+        
 
-        if(PlayerController.instance.IsRun==true)
+
+        if (PlayerController.instance.IsRun==true)
         {           
             stamina.Subtract(stamina.decayRate * Time.deltaTime);
             if (stamina.curValue <= 0)
@@ -65,14 +70,24 @@ public class PlayerConditions : MonoBehaviour
         {
             stamina.Add(stamina.regenRate * Time.deltaTime);
         }
-
-        if (health.curValue == 0.0f)
+        if(health.curValue <= 70f&& health.curValue > 30f)
+        {
+            main.startColor = Color.yellow;
+        }
+        else if(health.curValue <= 30f)
+        {
+            main.startColor = Color.red;
+        }
+        else if (health.curValue <= 0.0f)
         {
             Die();
         }        
         health.uiBar.fillAmount = health.GetPercentage();
         stamina.uiBar.fillAmount = stamina.GetPercentage();
     }
+
+
+
     public void Heal(float amount)
     {
         health.Add(amount);
