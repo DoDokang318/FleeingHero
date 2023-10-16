@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
+using UnityEditor;
 
 public class Monster : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Monster : MonoBehaviour
     private NavMeshAgent nmAgent; // 네비게이션
     private Transform target; // 타겟 즉 플레이어
     public float lostDistance; // 추격 중지 거리
+
+
 
     public enum State  // 상태
     {
@@ -32,21 +35,21 @@ public class Monster : MonoBehaviour
 
         state = State.IDLE;
         StartCoroutine(StateMachine());
-        Debug.Log("0번");
+        //Debug.Log("0번");
     }
 
     IEnumerator StateMachine()
     {
         while (Data.HP > 0)
         {
-            Debug.Log("1번");
+            //Debug.Log("1번");
             yield return StartCoroutine(state.ToString());
         }
     }
 
     IEnumerator IDLE()
     {
-        Debug.Log("정지");
+       // Debug.Log("정지");
         // 현재 animator 상태정보 얻기
         var curAnimStateInfo = Animator.GetCurrentAnimatorStateInfo(0);
 
@@ -57,6 +60,7 @@ public class Monster : MonoBehaviour
         // 몬스터가 Idle 상태일 때 두리번 거리게 하는 코드
         // 50% 확률로 좌/우로 돌아 보기
         int dir = Random.Range(0f, 1f) > 0.5f ? 1 : -1;
+        //dir = 0;// 임시
 
         // 회전 속도 설정
         float lookSpeed = Random.Range(25f, 40f);
@@ -70,7 +74,7 @@ public class Monster : MonoBehaviour
         }
     }
 
-    IEnumerator CHASE()
+    IEnumerator CHASE() // 수정
     {
         Debug.Log("찾다");
         var curAnimStateInfo = Animator.GetCurrentAnimatorStateInfo(0);
@@ -133,13 +137,21 @@ public class Monster : MonoBehaviour
     {
         state = newState;
     }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.name != "player") return;
+    //    // sphere collider 가 player 를 감지하면      
+    //    target = other.transform;
+    //    // navmeshagent의 목표를 player 로 설정
+    //    nmAgent.SetDestination(target.position);
+    //    // StateMachine을 추적으로 변경
+    //    ChangeState(State.CHASE);
+    //}
 
-    private void OnTriggerEnter(Collider other)
+    public void Player_find(Transform other)
     {
-        if (other.name != "Player") return;
-        // Sphere Collider 가 Player 를 감지하면      
-        target = other.transform;
-        // NavMeshAgent의 목표를 Player 로 설정
+        Debug.Log("들어옴");
+        target = other;
         nmAgent.SetDestination(target.position);
         // StateMachine을 추적으로 변경
         ChangeState(State.CHASE);
@@ -151,5 +163,6 @@ public class Monster : MonoBehaviour
         if (target == null) return;
         // target 이 null 이 아니면 target 을 계속 추적
         nmAgent.SetDestination(target.position);
+
     }
 }

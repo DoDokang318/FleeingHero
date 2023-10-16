@@ -16,8 +16,9 @@ GameObject:
   - component: {fileID: 233674526211035865}
   - component: {fileID: 108605452291111264}
   - component: {fileID: 4092395818479234203}
-  m_Layer: 0
-  m_Name: Cube
+  - component: {fileID: -3973629070709225008}
+  m_Layer: 9
+  m_Name: Monster(sample)
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,7 +37,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1140859428574328488
 MeshFilter:
@@ -103,11 +104,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 1, z: 10}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1062248930475682595
 MonoBehaviour:
@@ -122,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Data>k__BackingField: {fileID: 11400000, guid: 8f4ab6edf0fab734985b02d0b9325070, type: 2}
-  lostDistance: 0
+  lostDistance: 10
   state: 0
 --- !u!195 &233674526211035865
 NavMeshAgent:
@@ -168,7 +169,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -194,3 +195,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-3973629070709225008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3807902172796732707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c58475052dfb1a14db4b59e5615fa4e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_angle: 45
+  m_distance: 10
+  m_layerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  monster: {fileID: 1062248930475682595}
