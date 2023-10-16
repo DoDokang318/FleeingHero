@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterAttack : MonoBehaviour
+public class MonsterAttack : MonsterBaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    public MonsterAttack(MonsterStateMachine monsterstateMachine) : base(monsterstateMachine)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Enter()
     {
-        
+        base.Enter();
+        StartAnimation(stateMachine.Monster.AnimationData.AttackParameterName);
+    }
+    public override void Exit() 
+    { 
+        base.Exit();
+        StopAnimation(stateMachine.Monster.AnimationData.AttackParameterName);
     }
 }
