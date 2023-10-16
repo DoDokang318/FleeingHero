@@ -13,7 +13,7 @@ public class MonsterAnimation
     public int IdleParmaeterHash { get; private set; }
     public int WalkParameterHash { get; private set; }
     public int RunParameterHash { get; private set; }
-
+        
     public int AttackParameterName { get; private set; }
 
     public void Initialize()
