@@ -6,6 +6,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+
+
+    private Animator animator;
+
+    private readonly int Walk = Animator.StringToHash("FlashWalk");
+    private readonly int Run = Animator.StringToHash("FlashRun");
     [Header("Movement")]
     public float moveSpeed;
     public float RunSpeed;
@@ -31,14 +37,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private bool canUseHeadbob = true;
 
-    [Header("HeadBobParameters")]
-    [SerializeField] private float walkBobSpeed = 14f;
-    [SerializeField] private float walkBobAmount = 0.05f;
-    [SerializeField] private float sprintBobSpeed = 18f;
-    [SerializeField] private float sprintBobAmount = 0.11f;
 
-    private float defaultYpos = 0;
-    private float timer;
 
 
 
@@ -54,15 +53,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject FlashlightLight;
     bool FlashLightActive = false;
+
+
+
+
     private void Awake()
     {
         instance = this;
         _rigidbody = GetComponent<Rigidbody>();
-        defaultYpos = PlayerCamera.transform.localPosition.y;
+     
+
+        
 
     }
     void Start()
     {
+
+         animator = GetComponentInChildren<Animator>();
         FlashlightLight.gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked; //커서 없에기
     }
@@ -85,29 +92,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (canUseHeadbob)
-        {
-            HandleHeadbob();
-        }
-    }
-
-    private void HandleHeadbob()
-    {
-        Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        if (IsGrounded()==false)
-        {
-            return;
-        }
-       if(Math.Abs(dir.x) > 0.1f|| Math.Abs(dir.z) > 0.1f)
-        {
-            timer = Time.deltaTime * (IsRun ? sprintBobSpeed : walkBobSpeed);
-            PlayerCamera.transform.localPosition = new Vector3(
-                PlayerCamera.transform.localPosition.x,
-                (float)(defaultYpos + Math.Sin(timer) *(IsRun ? sprintBobAmount : walkBobAmount)),
-                PlayerCamera.transform.localPosition.z);
-        }
 
     }
+
+   
 
     private void Move()
     {
@@ -115,10 +103,26 @@ public class PlayerController : MonoBehaviour
         if(IsRun == true&&IsStamina == true)
         {
             dir = moveSpeed*RunSpeed*dir;
+            animator.SetBool(Run, false);
+            if (Math.Abs(dir.x) > 0.1 || Math.Abs(dir.z) > 0.1)
+            {
+                animator.SetBool(Walk, false);
+                animator.SetBool(Run, true);
+            }
         }
-        else 
+        else  if(IsRun == false || IsStamina == false )
         {
             dir *= moveSpeed;
+            animator.SetBool(Walk, false);
+            if (Math.Abs(dir.x) > 0.1 || Math.Abs(dir.z) > 0.1)
+            {
+                animator.SetBool(Walk, true);
+                animator.SetBool(Run, false);
+            }
+        }
+        else
+        {
+            
         }
       
         dir.y = _rigidbody.velocity.y;
@@ -149,6 +153,8 @@ public class PlayerController : MonoBehaviour
         else if (context.phase == InputActionPhase.Canceled)
         {
             curMovementInput = Vector2.zero;
+            animator.SetBool(Walk, false);
+            animator.SetBool(Run, false);
         }
     }
 
