@@ -27,15 +27,15 @@ public class PlayerController : MonoBehaviour
 
 
     [Header("Look")]
-    [SerializeField]  private Camera PlayerCamera;
+
     public Transform cameraContainer;
+ 
     public float minXLook;
     public float maxXLook;
     private float camCurXRot;
     public float lookSensitivity;
     private Vector2 mouseDelta;
 
-    [SerializeField] private bool canUseHeadbob = true;
 
 
 
@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
 
-         animator = GetComponentInChildren<Animator>();
+        // animator = GetComponentInChildren<Animator>();
         FlashlightLight.gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked; //커서 없에기
     }
@@ -82,10 +82,10 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate() // 카메라작업 
     {
-        if (canLook)
-        {
-            CameraLook();
-        }
+        //if (canLook)
+        //{
+        //    CameraLook();
+        //}
 
        
     }
@@ -103,21 +103,21 @@ public class PlayerController : MonoBehaviour
         if(IsRun == true&&IsStamina == true)
         {
             dir = moveSpeed*RunSpeed*dir;
-            animator.SetBool(Run, false);
+            //animator.SetBool(Run, false);
             if (Math.Abs(dir.x) > 0.1 || Math.Abs(dir.z) > 0.1)
             {
-                animator.SetBool(Walk, false);
-                animator.SetBool(Run, true);
+               // animator.SetBool(Walk, false);
+                //animator.SetBool(Run, true);
             }
         }
         else  if(IsRun == false || IsStamina == false )
         {
             dir *= moveSpeed;
-            animator.SetBool(Walk, false);
+            //animator.SetBool(Walk, false);
             if (Math.Abs(dir.x) > 0.1 || Math.Abs(dir.z) > 0.1)
             {
-                animator.SetBool(Walk, true);
-                animator.SetBool(Run, false);
+               // animator.SetBool(Walk, true);
+                //animator.SetBool(Run, false);
             }
         }
         else
@@ -135,13 +135,13 @@ public class PlayerController : MonoBehaviour
         camCurXRot += mouseDelta.y * lookSensitivity;
         camCurXRot = Mathf.Clamp(camCurXRot, minXLook, maxXLook);
         cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);//마우스 를상하로 움직이는거에따라서 움직이게해주는것
-
         transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
     }
 
     public void OnLookInput(InputAction.CallbackContext context)
     {
         mouseDelta = context.ReadValue<Vector2>();
+      
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)
@@ -153,8 +153,8 @@ public class PlayerController : MonoBehaviour
         else if (context.phase == InputActionPhase.Canceled)
         {
             curMovementInput = Vector2.zero;
-            animator.SetBool(Walk, false);
-            animator.SetBool(Run, false);
+            //animator.SetBool(Walk, false);
+            //animator.SetBool(Run, false);
         }
     }
 
