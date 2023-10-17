@@ -15,11 +15,13 @@ public class Condition
     public float decayRate;
     public Image uiBar;
 
-
-
     public void Add(float amound)
     {
         curValue = Mathf.Min(curValue+amound,maxValue);
+    }
+    public void Hit(float amound)
+    {
+        curValue -= amound;
     }
 
     public void Subtract(float amount)
@@ -38,11 +40,9 @@ public class PlayerConditions : MonoBehaviour
     public Condition stamina;
     public UnityEvent onTakeDamage;
     public ParticleSystem HPParticle;
- 
-
 
     void Start()
-    {
+    {       
         health.curValue = health.startValue;      
         stamina.curValue = stamina.startValue;
         
@@ -70,6 +70,7 @@ public class PlayerConditions : MonoBehaviour
         {
             stamina.Add(stamina.regenRate * Time.deltaTime);
         }
+
         if(health.curValue <= 70f&& health.curValue > 30f)
         {
             main.startColor = Color.yellow;
@@ -103,6 +104,12 @@ public class PlayerConditions : MonoBehaviour
 
         stamina.Subtract(amount);
         return true;
+    }
+
+    public void TakePhysicalDamage(int damageAmount)
+    {
+        health.Subtract(damageAmount);
+        onTakeDamage?.Invoke();
     }
 
 }
