@@ -41,9 +41,6 @@ public class PlayerConditions : MonoBehaviour
     public UnityEvent onTakeDamage;
     public ParticleSystem HPParticle;
 
-    public int HitHP = 30;
-
-
     void Start()
     {       
         health.curValue = health.startValue;      
