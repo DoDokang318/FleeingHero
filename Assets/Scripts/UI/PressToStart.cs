@@ -6,11 +6,13 @@ public class ImageSwitcher : MonoBehaviour
 {
     [SerializeField] private GameObject[] images;
     private int currentImageIndex = 0;
+    public AudioManagers Audiomanagers;
 
     private void Start()
     {
         // 첫번째 이미지 활성화
         ToggleImage(currentImageIndex);
+        Audiomanagers.PitchCheck = false;
     }
 
     private void Update()
@@ -23,6 +25,8 @@ public class ImageSwitcher : MonoBehaviour
 
             ToggleImage(currentImageIndex, true);
             ToggleImage((currentImageIndex + 1) % images.Length, true);
+
+            Audiomanagers.PlaySound(1);
         }
     }
 

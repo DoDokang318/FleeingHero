@@ -14,6 +14,7 @@ public class CreateCharacter : MonoBehaviour
     public static string characterId = "";
     public Text characterNameText;
     public Text guideText;
+    public AudioManagers Audiomanagers;
     [SerializeField] private GameObject popup;
     [SerializeField] private GameObject horror;
     [SerializeField] private GameObject input;
@@ -45,6 +46,7 @@ public class CreateCharacter : MonoBehaviour
             popup.SetActive(true);
             horror.SetActive(true);
             input.SetActive(false);
+            Audiomanagers.PlaySound(2);
             DontDestroyOnLoad(characterNameText);
         }
         else if (!string.IsNullOrEmpty(enteredName) && enteredName.Contains(" "))
