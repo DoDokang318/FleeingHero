@@ -25,9 +25,10 @@ public class Monster : MonoBehaviour
     [Header("NAv")]
     private NavMeshAgent nmAgent; // 네비게이션
     private Transform target; // 타겟 즉 플레이어
-    public float lostDistance; // 추격 중지 거리
+    public float lostDistance; // 추격 중지 
 
     private MonsterStateMachine stateMachine;
+    private AudioManagers audioManager;
 
     private void Awake()
     {
@@ -55,9 +56,10 @@ public class Monster : MonoBehaviour
         state = State.IDLE;
         StartCoroutine(StateMachine());
         stateMachine.ChangeStates(stateMachine.IdleState);
+        audioManager = AudioManagers.I;
         //Debug.Log("0번");
     }
-
+    
     IEnumerator StateMachine()
     {
         while (Data.HP > 0)
@@ -110,7 +112,9 @@ public class Monster : MonoBehaviour
         Animator.SetBool("Attack", false);
         Animator.SetBool("Idle", false);
         Animator.SetBool("Walk", false);
-
+        audioManager.sfxMonsterPlayer.PlayOneShot(audioManager.sfxMonsterFollow);
+        audioManager.sfxMonsterPlayer.pitch = 1.5f;
+        audioManager.sfxMonsterPlayer.spatialBlend = 0f;
         var curAnimStateInfo = Animator.GetCurrentAnimatorStateInfo(0);
 
         nmAgent.velocity = Vector3.zero;
@@ -137,6 +141,7 @@ public class Monster : MonoBehaviour
             Animator.SetBool("Run", false);
             target = null;
             nmAgent.SetDestination(transform.position);
+            audioManager.sfxMonsterPlayer.Stop();
             yield return null;
             // StateMachine 을 대기로 변경
             ChangeState(State.IDLE);
@@ -227,6 +232,15 @@ public class Monster : MonoBehaviour
 
         yield return null;
     }
+    IEnumerator SoundMonster()
+    {
+        audioManager.sfxMonsterPlayer.clip = audioManager.sfxMonsterNormal[Random.Range(0, audioManager.sfxMonsterNormal.Length)];
+        audioManager.sfxMonsterPlayer.Play();
+        audioManager.sfxMonsterPlayer.spatialBlend = 1f;
+        audioManager.sfxMonsterPlayer.pitch = 1f;
+
+        yield return new WaitForSeconds(3f);
+    }
 
     //이동함수
     Vector3 GetWanderLocation()
@@ -255,6 +269,20 @@ public class Monster : MonoBehaviour
     void ChangeState(State newState)
     {
         state = newState;
+        if (audioManager == null)
+            return;
+        if(state == State.IDLE)
+        {
+            StartCoroutine(SoundMonster());
+        }
+        if(state == State.Walk)
+        {
+            StartCoroutine(SoundMonster());
+        }
+        if(state == State.CHASE)
+        {
+
+        }
     }
 
     //플레이어를 찾았다.
