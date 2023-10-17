@@ -25,7 +25,7 @@ public class Prologue : MonoBehaviour
 
     private IEnumerator PlayPrologue()
     {
-        string prologueMessage = "용사 " + CreateCharacter.characterId + "여, 어서 일어나게... ";
+        string prologueMessage = "용사 " + CreateCharacter.characterId + "♥여, 어서 일어나게... ";
 
         for (int i = 0; i < prologueMessage.Length; i++)
         {
@@ -48,7 +48,7 @@ public class Prologue : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         prologueText.text = "";
 
-        string prologueMessage2 = "테스트2 타이핑 확인 가갸거겨고교구규으이 ";
+        string prologueMessage2 = "아 뭐야... 잘 자고 있었는데";
 
         for (int i = 0; i < prologueMessage2.Length; i++)
         {
@@ -59,6 +59,26 @@ public class Prologue : MonoBehaviour
 
             prologueText.text += prologueMessage2[i];
             if (prologueMessage2[i] != ' ' && prologueMessage2[i] != ',')
+            {
+                audioManagers.PlaySound(0);
+            }
+            yield return new WaitForSeconds(0.2f);
+        }
+
+        yield return new WaitForSeconds(0.5f);
+        prologueText.text = "";
+
+        string prologueMessage3 = "텍스트 3 테스트용";
+
+        for (int i = 0; i < prologueMessage3.Length; i++)
+        {
+            if (skipPrologue)
+            {
+                break;
+            }
+
+            prologueText.text += prologueMessage3[i];
+            if (prologueMessage3[i] != ' ' && prologueMessage3[i] != ',')
             {
                 audioManagers.PlaySound(0);
             }
