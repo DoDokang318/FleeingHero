@@ -27,6 +27,11 @@ public class AudioManagers : MonoBehaviour
     public float sfxVolume;
     public Slider sfx_Slider;
 
+    [Header("MonsterAudio")]
+    public AudioSource sfxMonsterPlayer;
+    public AudioClip[] sfxMonsterNormal;
+    public AudioClip sfxMonsterFollow;
+
     public bool PitchCheck = true;
 
     private void Init()
