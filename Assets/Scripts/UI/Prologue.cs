@@ -6,12 +6,13 @@ public class Prologue : MonoBehaviour
 {
     private bool skipPrologue = false;
     public Text prologueText;
-    public AudioManagers Audiomanagers;
+    public AudioManagers audioManagers;
+    public CreateCharacter createCharacter;
 
     private void Start()
     {
         StartCoroutine(PlayPrologue());
-        Audiomanagers.PitchCheck = true;
+        audioManagers.PitchCheck = true;
     }
 
     private void Update()
@@ -24,7 +25,7 @@ public class Prologue : MonoBehaviour
 
     private IEnumerator PlayPrologue()
     {
-        string prologueMessage = "옛날 옛적, 세상을 구하기 위해 모험을 떠난 용사 ";
+        string prologueMessage = "용사 " + CreateCharacter.characterId + "여, 어서 일어나게... ";
 
         for (int i = 0; i < prologueMessage.Length; i++)
         {
@@ -37,7 +38,7 @@ public class Prologue : MonoBehaviour
             if (prologueMessage[i] != ' ' && prologueMessage[i] != ',')
             {
                 
-                Audiomanagers.PlaySound(0);
+                audioManagers.PlaySound(0);
            
 
             }
@@ -59,15 +60,11 @@ public class Prologue : MonoBehaviour
             prologueText.text += prologueMessage2[i];
             if (prologueMessage2[i] != ' ' && prologueMessage2[i] != ',')
             {
-                Audiomanagers.PlaySound(0);
+                audioManagers.PlaySound(0);
             }
-
             yield return new WaitForSeconds(0.2f);
-
-
-            // 모르겠는데 잠시만
         }
-        Audiomanagers.PitchCheck = false;
+        audioManagers.PitchCheck = false;
     }
 
 }
