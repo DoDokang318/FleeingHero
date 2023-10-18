@@ -62,7 +62,7 @@ public class PlayerConditions : MonoBehaviour
             stamina.Subtract(stamina.decayRate * Time.deltaTime);
             if (stamina.curValue <= 0)
             {
-                
+               
                 PlayerController.instance.IsStamina = false;
             }
             else
@@ -81,14 +81,20 @@ public class PlayerConditions : MonoBehaviour
         {
             main.startColor = Color.yellow;
         }
-        else if(health.curValue <= 30f)
+        else if(health.curValue <= 30f && health.curValue > 0.0f)
         {
             main.startColor = Color.red;
         }
-        else if (health.curValue <= 0.0f)
+        else if (health.curValue <= 0.0f) 
         {
-            GameManager.I.Die();
-        }        
+            main.startColor = Color.red;
+            Debug.Log(health.curValue);
+            GameManager.I.Die(this.gameObject);
+        }
+        else
+        {
+            Debug.Log(health.curValue);
+        }
         health.uiBar.fillAmount = health.GetPercentage();
         stamina.uiBar.fillAmount = stamina.GetPercentage();
     }
