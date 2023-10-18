@@ -12,8 +12,6 @@ public class InGameUI : MonoBehaviour
     {
         previousTimeScale = Time.timeScale;
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -24,6 +22,8 @@ public class InGameUI : MonoBehaviour
                 isUIVisible = false;
                 Time.timeScale = previousTimeScale;
                 Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Locked;
+                //Debug.Log("1");
             }
             else
             {
@@ -32,6 +32,8 @@ public class InGameUI : MonoBehaviour
                 previousTimeScale = Time.timeScale; 
                 Time.timeScale = 0f; 
                 Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                //Debug.Log("2");
             }
         }
     }
