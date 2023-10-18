@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Build;
 using UnityEngine;
 
@@ -10,6 +11,11 @@ public class Attack : MonoBehaviour
     private Collider targatCol;
     public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
+
+    public MonsterData Data { get; private set; }
+    [SerializeField] private Collider myCollider;
+
+    private List<Collider> alreadyColliderWith = new List<Collider>();
     // Start is called before the first frame update
     void Start()
     {
@@ -31,8 +37,18 @@ public class Attack : MonoBehaviour
 
     public void damage()
     {
-        targatCol.TryGetComponent(out PlayerConditions hp);
-        Debug.Log("피감소");
+        if (targatCol == null) return;
+        if (targatCol == myCollider) return;
+        if (alreadyColliderWith.Contains(targatCol)) return;
+
+        alreadyColliderWith.Add(targatCol);
+
+        if (targatCol.TryGetComponent(out PlayerConditions curValue))
+        {
+            curValue.TakePhysicalDamage(10);
+            Debug.Log(curValue.health.curValue+"피감소");
+            alreadyColliderWith.Remove(targatCol);
+        }
     }
 
     public void tagetColl(Collider other)
