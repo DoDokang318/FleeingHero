@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
         {
             //게임 오버 UI
 
+
+
         }
     }
 
