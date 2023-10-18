@@ -8,6 +8,9 @@ public class ItemTrigger : OnRaycast
 
     public override void OnInteract()
     {
+
+
+      
         base.OnInteract();
         Inventory inventory = FindObjectOfType<Inventory>();
         inventory.AddItem(GetItem);

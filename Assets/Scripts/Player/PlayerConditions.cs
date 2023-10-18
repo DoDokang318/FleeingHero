@@ -15,6 +15,8 @@ public class Condition
     public float decayRate;
     public Image uiBar;
 
+    
+
     public void Add(float amound)
     {
         curValue = Mathf.Min(curValue+amound,maxValue);
@@ -40,6 +42,7 @@ public class PlayerConditions : MonoBehaviour
     public Condition stamina;
     public UnityEvent onTakeDamage;
     public ParticleSystem HPParticle;
+   
 
     void Start()
     {       
@@ -51,24 +54,27 @@ public class PlayerConditions : MonoBehaviour
     {
         var settings = HPParticle;
         var main = settings.main;
+
+
         
-
-
         if (PlayerController.instance.IsRun==true)
         {           
             stamina.Subtract(stamina.decayRate * Time.deltaTime);
             if (stamina.curValue <= 0)
             {
+                
                 PlayerController.instance.IsStamina = false;
             }
             else
             {
+               
                 PlayerController.instance.IsStamina = true;
             }
         }
         else
         {
             stamina.Add(stamina.regenRate * Time.deltaTime);
+         
         }
 
         if(health.curValue <= 70f&& health.curValue > 30f)
@@ -81,7 +87,7 @@ public class PlayerConditions : MonoBehaviour
         }
         else if (health.curValue <= 0.0f)
         {
-            Die();
+            GameManager.I.Die();
         }        
         health.uiBar.fillAmount = health.GetPercentage();
         stamina.uiBar.fillAmount = stamina.GetPercentage();
@@ -93,10 +99,7 @@ public class PlayerConditions : MonoBehaviour
     {
         health.Add(amount);
     }
-    public void Die()
-    {
-        Debug.Log("Á×À½ ");
-    }
+
     public bool UseStamina(float amount)
     {
         if (stamina.curValue < 0)
