@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     bool FlashLightActive = false;
 
 
-
+    public GameObject StaMinauiBar;
 
     private void Awake()
     {
@@ -80,21 +80,7 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
-    private void LateUpdate() // 카메라작업 
-    {
-        //if (canLook)
-        //{
-        //    CameraLook();
-        //}
-
-       
-    }
-
-    private void Update()
-    {
-
-    }
-
+ 
    
 
     private void Move()
@@ -106,8 +92,7 @@ public class PlayerController : MonoBehaviour
             //animator.SetBool(Run, false);
             if (Math.Abs(dir.x) > 0.1 || Math.Abs(dir.z) > 0.1)
             {
-               // animator.SetBool(Walk, false);
-                //animator.SetBool(Run, true);
+                StaMinauiBar.SetActive(true);
             }
         }
         else  if(IsRun == false || IsStamina == false )
@@ -116,8 +101,7 @@ public class PlayerController : MonoBehaviour
             //animator.SetBool(Walk, false);
             if (Math.Abs(dir.x) > 0.1 || Math.Abs(dir.z) > 0.1)
             {
-               // animator.SetBool(Walk, true);
-                //animator.SetBool(Run, false);
+                StaMinauiBar.SetActive(false);
             }
         }
         else

@@ -324,7 +324,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4947128333053135562
 RectTransform:
   m_ObjectHideFlags: 0
@@ -532,18 +532,13 @@ MonoBehaviour:
   IsRun: 0
   IsStamina: 0
   SitTime: 0.2
-  PlayerCamera: {fileID: 4048330663341495901}
   cameraContainer: {fileID: 1079015110241881412}
   minXLook: -85
   maxXLook: 85
   lookSensitivity: 0.2
-  canUseHeadbob: 0
-  walkBobSpeed: 14
-  walkBobAmount: 0.5
-  sprintBobSpeed: 18
-  sprintBobAmount: 1
   canLook: 1
   FlashlightLight: {fileID: 372252338916596382}
+  StaMinauiBar: {fileID: 0}
 --- !u!114 &8829767625153753709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1149,7 +1144,7 @@ Transform:
   - {fileID: 846364160341282876}
   - {fileID: 5823350427043008053}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7026462093140085993
 GameObject:
