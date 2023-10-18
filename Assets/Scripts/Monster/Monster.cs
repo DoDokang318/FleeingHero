@@ -9,7 +9,6 @@ using Unity.VisualScripting;
 public class Monster : MonoBehaviour
 {
     [field: SerializeField] public MonsterData Data { get; private set; }  // 적 기본 데이터
-   [field: SerializeField] public MonsterAnimation AnimationData { get; private set; }  // 적 기본 데이터
 
     public Rigidbody Rigidbody { get; private set; }
     public Animator Animator { get; private set; }
@@ -27,13 +26,11 @@ public class Monster : MonoBehaviour
     private Transform target; // 타겟 즉 플레이어
     public float lostDistance; // 추격 중지 
 
-    private MonsterStateMachine stateMachine;
     private AudioManagers audioManager;
 
     private void Awake()
     {
-        AnimationData.Initialize();
-        stateMachine = new MonsterStateMachine(this);
+
     }
     public enum State  // 상태
     {
@@ -55,7 +52,6 @@ public class Monster : MonoBehaviour
 
         state = State.IDLE;
         StartCoroutine(StateMachine());
-        stateMachine.ChangeStates(stateMachine.IdleState);
         audioManager = AudioManagers.I;
         //Debug.Log("0번");
     }
