@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Threading;
 using static UnityEngine.GraphicsBuffer;
+using Unity.VisualScripting;
 
 public class Monster : MonoBehaviour
 {
@@ -14,11 +15,20 @@ public class Monster : MonoBehaviour
     public Animator Animator { get; private set; }
     public Attack attack { get; private set; }
 
+    [Header("Wandering")]
+    public float minWanderDistance; // 최소 정찰거리
+    public float maxWanderDistance; // 최대 정찰거리
+    public float MaxWanderTime; // 정찰 시간제한
+    private float waittimes = 0f;
+    private bool reSet = true; // 정찰 가능 상태
+
+    [Header("NAv")]
     private NavMeshAgent nmAgent; // 네비게이션
     private Transform target; // 타겟 즉 플레이어
-    public float lostDistance; // 추격 중지 거리
+    public float lostDistance; // 추격 중지 
 
     private MonsterStateMachine stateMachine;
+    private AudioManagers audioManager;
 
     private void Awake()
     {
@@ -30,6 +40,7 @@ public class Monster : MonoBehaviour
         IDLE,
         CHASE,
         ATTACK,
+        Walk,
         KILLED
     }
     public State state;
@@ -45,9 +56,10 @@ public class Monster : MonoBehaviour
         state = State.IDLE;
         StartCoroutine(StateMachine());
         stateMachine.ChangeStates(stateMachine.IdleState);
+        audioManager = AudioManagers.I;
         //Debug.Log("0번");
     }
-
+    
     IEnumerator StateMachine()
     {
         while (Data.HP > 0)
@@ -63,6 +75,7 @@ public class Monster : MonoBehaviour
         Animator.SetBool("Run", false);
         Animator.SetBool("Attack", false);
         Animator.SetBool("Idle", false);
+        Animator.SetBool("Walk", false);
 
         nmAgent.velocity = Vector3.zero;
         nmAgent.isStopped = true;
@@ -87,18 +100,22 @@ public class Monster : MonoBehaviour
         {
             transform.localEulerAngles = new Vector3(0f, transform.localEulerAngles.y + (dir) * Time.deltaTime * lookSpeed, 0f);
 
+            ChangeState(State.Walk);
             yield return null;
         }
     }
 
     IEnumerator CHASE() // 수정
     {
-        var curAnimStateInfo = Animator.GetCurrentAnimatorStateInfo(0);
-
         Animator.SetBool("Idle", false);
         Animator.SetBool("Run", true);
         Animator.SetBool("Attack", false);
         Animator.SetBool("Idle", false);
+        Animator.SetBool("Walk", false);
+        audioManager.sfxMonsterPlayer.PlayOneShot(audioManager.sfxMonsterFollow);
+        audioManager.sfxMonsterPlayer.pitch = 1.5f;
+        audioManager.sfxMonsterPlayer.spatialBlend = 0f;
+        var curAnimStateInfo = Animator.GetCurrentAnimatorStateInfo(0);
 
         nmAgent.velocity = Vector3.zero;
         nmAgent.isStopped = false;
@@ -124,6 +141,7 @@ public class Monster : MonoBehaviour
             Animator.SetBool("Run", false);
             target = null;
             nmAgent.SetDestination(transform.position);
+            audioManager.sfxMonsterPlayer.Stop();
             yield return null;
             // StateMachine 을 대기로 변경
             ChangeState(State.IDLE);
@@ -145,6 +163,7 @@ public class Monster : MonoBehaviour
         Animator.SetBool("Run", false);
         Animator.SetBool("Attack", true);
         Animator.SetBool("Idle", false);
+        Animator.SetBool("Walk", false);
 
         // 공격 애니메이션은 공격 후 Idle Battle 로 이동하기 때문에 
         // 코드가 이 지점에 오면 무조건 Attack01 을 Play
@@ -172,6 +191,76 @@ public class Monster : MonoBehaviour
         yield return null;
     }
 
+    //순찰
+    IEnumerator Walk()
+    {
+        //nmAgent.velocity = Vector3.zero;
+        nmAgent.isStopped = false;
+
+        Animator.SetBool("Idle", false);
+        Animator.SetBool("Run", false);
+        Animator.SetBool("Attack", false);
+        Animator.SetBool("Idle", false);
+        Animator.SetBool("Walk", true);
+
+        if (nmAgent.remainingDistance > nmAgent.stoppingDistance)// 목표 지점인가
+        {
+            reSet = false;
+        }
+        else
+        {
+            waittimes = 0f;
+            reSet = true;
+            yield return null;
+            ChangeState(State.IDLE);
+        }
+
+        if (MaxWanderTime < (waittimes += Time.deltaTime)) // 제한 시간까지 못갔나
+        {
+            waittimes = 0f;
+            reSet = true;
+            yield return null;
+            ChangeState(State.IDLE);
+        }
+
+        if (reSet) // 정찰 가능인가.
+        {
+            nmAgent.destination = GetWanderLocation();
+            reSet = false;
+            yield return null;
+        }
+
+        yield return null;
+    }
+    IEnumerator SoundMonster()
+    {
+        audioManager.sfxMonsterPlayer.clip = audioManager.sfxMonsterNormal[Random.Range(0, audioManager.sfxMonsterNormal.Length)];
+        audioManager.sfxMonsterPlayer.Play();
+        audioManager.sfxMonsterPlayer.spatialBlend = 1f;
+        audioManager.sfxMonsterPlayer.pitch = 1f;
+
+        yield return new WaitForSeconds(3f);
+    }
+
+    //이동함수
+    Vector3 GetWanderLocation()
+    {
+        NavMeshHit hit;
+
+        NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance)), out hit, maxWanderDistance, NavMesh.AllAreas);
+
+        //int i = 0;
+        //while (Vector3.Distance(transform.position, hit.position) < lostDistance)
+        //{
+        //    NavMesh.SamplePosition(transform.position + (Random.onUnitSphere * Random.Range(minWanderDistance, maxWanderDistance)), out hit, maxWanderDistance, NavMesh.AllAreas);
+        //    i++;
+        //    if (i == 30)
+        //        break;
+        //}
+        Debug.Log(hit.position);
+        return hit.position;
+    }
+
     IEnumerator KILLED()
     {
         yield return null;
@@ -180,6 +269,20 @@ public class Monster : MonoBehaviour
     void ChangeState(State newState)
     {
         state = newState;
+        if (audioManager == null)
+            return;
+        if(state == State.IDLE)
+        {
+            StartCoroutine(SoundMonster());
+        }
+        if(state == State.Walk)
+        {
+            StartCoroutine(SoundMonster());
+        }
+        if(state == State.CHASE)
+        {
+
+        }
     }
 
     //플레이어를 찾았다.

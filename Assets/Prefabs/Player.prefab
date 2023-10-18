@@ -437,6 +437,7 @@ GameObject:
   - component: {fileID: 5908916474577574101}
   - component: {fileID: 8829767625153753709}
   - component: {fileID: 7735745978215685340}
+  - component: {fileID: 3810938202095197476}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -703,6 +704,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   HPParticle: {fileID: 2763372568184371887}
+--- !u!114 &3810938202095197476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021747689304308191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547aa0770c80944139bd2b6c16e17d65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: []
 --- !u!1 &2044730103444150342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,7 +1149,7 @@ Transform:
   - {fileID: 846364160341282876}
   - {fileID: 5823350427043008053}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7026462093140085993
 GameObject:
@@ -6198,6 +6212,7 @@ GameObject:
   - component: {fileID: 5543687131890770954}
   - component: {fileID: 4048330663341495901}
   - component: {fileID: 6506074606753339874}
+  - component: {fileID: 8001877243904314007}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6260,7 +6275,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 791
+    m_Bits: 799
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -6280,6 +6295,23 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8398295347200875391}
   m_Enabled: 1
+--- !u!114 &8001877243904314007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8398295347200875391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afdf6aa54688d44d381665282482f840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 4
+  interactedMask:
+    serializedVersion: 2
+    m_Bits: 8
+  inventory: {fileID: 3810938202095197476}
 --- !u!1 &9210442934424364390
 GameObject:
   m_ObjectHideFlags: 0

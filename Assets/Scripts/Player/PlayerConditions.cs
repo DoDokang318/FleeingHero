@@ -19,6 +19,10 @@ public class Condition
     {
         curValue = Mathf.Min(curValue+amound,maxValue);
     }
+    public void Hit(float amound)
+    {
+        curValue -= amound;
+    }
 
     public void Subtract(float amount)
     {
@@ -37,16 +41,8 @@ public class PlayerConditions : MonoBehaviour
     public UnityEvent onTakeDamage;
     public ParticleSystem HPParticle;
 
-  
-
-   
-    
-
     void Start()
-
-    {
-
-        
+    {       
         health.curValue = health.startValue;      
         stamina.curValue = stamina.startValue;
         
