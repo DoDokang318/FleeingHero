@@ -9,18 +9,18 @@ public class CreateCharacter : MonoBehaviour
 {
 
 
-    [Header("#InputField")]
+    [Header("#InputField\n")]
     [SerializeField] private InputField inputField;
     public static string characterId = "";
-    public Text characterNameText;
-    public Text guideText;
-    public AudioManagers Audiomanagers;
+    [SerializeField] private Text characterNameText;
+    [SerializeField] private Text guideText;
+    [SerializeField] private AudioManagers Audiomanagers;
+    [Header("\n#Popup")]
     [SerializeField] private GameObject popup;
     [SerializeField] private GameObject horror;
     [SerializeField] private GameObject input;
-    public TextFadeOut textFadeOut;
-    [Header("\n")]
-    public Text popupText;
+    [SerializeField] private TextFadeOut textFadeOut;
+    [SerializeField] private Text popupText;
 
     private void Start()
     {
