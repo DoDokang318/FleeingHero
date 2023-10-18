@@ -20,22 +20,14 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        PlayerSpqwn();
+       // PlayerSpqwn();
     }
 
-    public void Die()
+    public void Die(GameObject gameObject)
     {
-        Destroy(Player);
+        Destroy(gameObject);
         Debug.Log("죽음 ");
         IsGameOver = true;
-
-        if (GameManager.I.IsGameOver == true)
-        {
-            //게임 오버 UI
-
-
-
-        }
     }
 
     public void PlayerSpqwn()
