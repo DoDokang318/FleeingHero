@@ -5382,7 +5382,7 @@ Transform:
   - {fileID: 4758187201931678564}
   - {fileID: 7220000174751512487}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4253381814663049099
 GameObject:
@@ -5744,6 +5744,7 @@ GameObject:
   - component: {fileID: 6616734885842203300}
   - component: {fileID: 6371514244378060610}
   - component: {fileID: 2506040137529496060}
+  - component: {fileID: 6767656180032082307}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5825,6 +5826,23 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7751259267896304204}
   m_Enabled: 1
+--- !u!114 &6767656180032082307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7751259267896304204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afdf6aa54688d44d381665282482f840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 4
+  interactedMask:
+    serializedVersion: 2
+    m_Bits: 8
+  inventory: {fileID: 845696443379547876}
 --- !u!1 &7844134051069855244
 GameObject:
   m_ObjectHideFlags: 0
@@ -6020,6 +6038,7 @@ GameObject:
   - component: {fileID: 987723758813076274}
   - component: {fileID: 5200197141769918659}
   - component: {fileID: 7434864525496294139}
+  - component: {fileID: 845696443379547876}
   - component: {fileID: 7935633383294855040}
   - component: {fileID: 2357847665319826613}
   m_Layer: 8
@@ -6122,6 +6141,20 @@ MonoBehaviour:
   lookSensitivity: 0.2
   canLook: 1
   FlashlightLight: {fileID: 987534448895786539}
+  StaMinauiBar: {fileID: 9024690753660630076}
+--- !u!114 &845696443379547876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8507304703611642489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547aa0770c80944139bd2b6c16e17d65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: []
 --- !u!114 &7935633383294855040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6285,7 +6318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3963978328875471025
 RectTransform:
   m_ObjectHideFlags: 0
