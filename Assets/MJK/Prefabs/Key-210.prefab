@@ -262,12 +262,13 @@ GameObject:
   - component: {fileID: 1010712892510448005}
   - component: {fileID: 6329213581827515763}
   - component: {fileID: 5317542491564711363}
+  - component: {fileID: 4461283983853480421}
   - component: {fileID: 9206044342410455357}
   - component: {fileID: 2696023222099159387}
   - component: {fileID: 585408030099184469}
   m_Layer: 3
   m_Name: Key-210
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -286,7 +287,7 @@ Transform:
   m_Children:
   - {fileID: 5259007674696028053}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6329213581827515763
 MeshFilter:
@@ -338,6 +339,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4461283983853480421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8341977545873025904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feca6a26c60734de8a19ba728baa69ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemUIText: {fileID: 0}
 --- !u!136 &9206044342410455357
 CapsuleCollider:
   m_ObjectHideFlags: 0
