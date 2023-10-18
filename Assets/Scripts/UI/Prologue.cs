@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.ParticleSystem;
 
@@ -11,6 +12,9 @@ public class Prologue : MonoBehaviour
     public AudioManagers audioManagers;
     public CreateCharacter createCharacter;
     public ParticleSystem particle;
+    public ParticleSystem particle2;
+    public GameObject btn;
+    private int fast;
     private void Start()
     {
         StartCoroutine(PlayPrologue());
@@ -20,10 +24,10 @@ public class Prologue : MonoBehaviour
 
     private void Update()
     {
-        if (Input.anyKeyDown)
-        {
-            skipPrologue = true;
-        }
+        //if (Input.anyKeyDown)
+        //{
+        //    skipPrologue = true;
+        //}
     }
 
     private IEnumerator PlayPrologue()
@@ -32,10 +36,10 @@ public class Prologue : MonoBehaviour
 
         for (int i = 0; i < prologueMessage.Length; i++)
         {
-            if (skipPrologue)
-            {
-                break;
-            }
+            //if (skipPrologue)
+            //{
+            //    break;
+            //}
 
             prologueText.text += prologueMessage[i];
             if (prologueMessage[i] != ' ' && prologueMessage[i] != ',')
@@ -46,7 +50,7 @@ public class Prologue : MonoBehaviour
 
             }
 
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(fast == 0 ? 0.2f : fast == 1 ? 0.1f : 0.05f);
         }
         yield return new WaitForSeconds(0.5f);
         prologueText.text = "";
@@ -55,17 +59,17 @@ public class Prologue : MonoBehaviour
 
         for (int i = 0; i < prologueMessage2.Length; i++)
         {
-            if (skipPrologue)
-            {
-                break;
-            }
+            //if (skipPrologue)
+            //{
+            //    break;
+            //}
 
             prologueText.text += prologueMessage2[i];
             if (prologueMessage2[i] != ' ' && prologueMessage2[i] != ',' && prologueMessage2[i] != '(' && prologueMessage2[i] != ')')
             {
                 audioManagers.PlaySound(0);
             }
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(fast == 0 ? 0.2f : fast == 1 ? 0.1f : 0.05f);
         }
 
         yield return new WaitForSeconds(0.5f);
@@ -75,17 +79,17 @@ public class Prologue : MonoBehaviour
 
         for (int i = 0; i < prologueMessage3.Length; i++)
         {
-            if (skipPrologue)
-            {
-                break;
-            }
+            //if (skipPrologue)
+            //{
+            //    break;
+            //}
 
             prologueText.text += prologueMessage3[i];
             if (prologueMessage3[i] != ' ' && prologueMessage3[i] != ',')
             {
                 audioManagers.PlaySound(0);
             }
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(fast == 0 ? 0.2f : fast == 1 ? 0.1f : 0.05f);
         }
 
         yield return new WaitForSeconds(1.0f);
@@ -96,19 +100,36 @@ public class Prologue : MonoBehaviour
         prologueText.color = Color.black;
         for (int i = 0; i < prologueMessage4.Length; i++)
         {
-            if (skipPrologue)
-            {
-                break;
-            }
+            //if (skipPrologue)
+            //{
+            //    break;
+            //}
 
             prologueText.text += prologueMessage4[i];
             if (prologueMessage4[i] != ' ' && prologueMessage4[i] != ',')
             {
                 audioManagers.PlaySound(0);
             }
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(fast == 0 ? 0.2f : fast == 1 ? 0.1f : 0.05f);
         }
+        yield return new WaitForSeconds(1.5f);
         audioManagers.PitchCheck = false;
+        LoadScene("Merge2");
+        Destroy(prologueText.gameObject);
+        Destroy(particle);
+        Destroy(particle2);
+        Destroy(btn.gameObject);
+    }
+    public void ButtonFast()
+    {
+        if (fast >= 0 && fast <= 1)
+        {
+            fast += 1;
+        }
     }
 
+    public void LoadScene(string Merge2)
+    {
+        SceneManager.LoadScene(Merge2);
+    }
 }
