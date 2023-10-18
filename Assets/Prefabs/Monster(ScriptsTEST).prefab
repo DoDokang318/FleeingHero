@@ -36,7 +36,7 @@ Transform:
   m_Children:
   - {fileID: 6303171841074614598}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &3357451155123109766
 CapsuleCollider:
@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 6303171841074614598}
   body: {fileID: 9084996555262252732}
+  myCollider: {fileID: 3357451155123109766}
 --- !u!1001 &6881380607958715701
 PrefabInstance:
   m_ObjectHideFlags: 0

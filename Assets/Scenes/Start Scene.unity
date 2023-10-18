@@ -489,7 +489,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2125166658}
+      - m_Target: {fileID: 1503039317700526789}
         m_TargetAssemblyTypeName: AudioManagers, Assembly-CSharp
         m_MethodName: ClickSound
         m_Mode: 1
@@ -790,7 +790,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2125166658}
+      - m_Target: {fileID: 1503039317700526789}
         m_TargetAssemblyTypeName: AudioManagers, Assembly-CSharp
         m_MethodName: SetsfxVolume
         m_Mode: 0
@@ -1582,7 +1582,7 @@ MonoBehaviour:
   - {fileID: 234228098}
   - {fileID: 1349308722}
   - {fileID: 1996634823}
-  Audiomanagers: {fileID: 2125166658}
+  Audiomanagers: {fileID: 1503039317700526789}
 --- !u!1 &243290838
 GameObject:
   m_ObjectHideFlags: 0
@@ -8651,7 +8651,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2125166658}
+      - m_Target: {fileID: 1503039317700526789}
         m_TargetAssemblyTypeName: AudioManagers, Assembly-CSharp
         m_MethodName: ClickSound
         m_Mode: 1
@@ -21737,7 +21737,7 @@ MonoBehaviour:
   inputField: {fileID: 5466805608626358213}
   characterNameText: {fileID: 8566136325481570950}
   guideText: {fileID: 4902376326539149555}
-  Audiomanagers: {fileID: 2125166658}
+  Audiomanagers: {fileID: 1503039317700526789}
   popup: {fileID: 9007476043829117602}
   horror: {fileID: 1033972166}
   input: {fileID: 2850320721358180219}
@@ -23635,7 +23635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prologueText: {fileID: 996283521}
-  audioManagers: {fileID: 2125166658}
+  audioManagers: {fileID: 1503039317700526789}
   createCharacter: {fileID: 0}
   particle: {fileID: 491049491}
 --- !u!212 &1609846396
@@ -24880,7 +24880,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2125166658}
+      - m_Target: {fileID: 1503039317700526789}
         m_TargetAssemblyTypeName: AudioManagers, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 0
@@ -25000,7 +25000,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2125166658}
+      - m_Target: {fileID: 1503039317700526789}
         m_TargetAssemblyTypeName: AudioManagers, Assembly-CSharp
         m_MethodName: ClickSound
         m_Mode: 1
@@ -25954,62 +25954,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f6aa6586f77764fab668a0a62d8f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2125166655
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2125166657}
-  - component: {fileID: 2125166658}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2125166657
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2125166655}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.37992096, y: 0.4649849, z: 0.05942154}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2125166658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2125166655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b492c4cfa9a27b418cfe66c87cced9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bgmPlayer: {fileID: 1434574790}
-  bgmClip: {fileID: 8300000, guid: 723411c4e36400945ac80a0cf0f4fb75, type: 3}
-  bgmVolume: 0.3
-  bgm_Slider: {fileID: 1951339806}
-  sfxPlayer: {fileID: 1473492264}
-  sfxClip:
-  - {fileID: 8300000, guid: ee5464b6fdfb2234caee3bf393bcbf1d, type: 3}
-  - {fileID: 8300000, guid: 1e73584d1494c9c4a8b8f10ab211c002, type: 3}
-  - {fileID: 8300000, guid: 152db575c15c7254aaab9f889260e7d8, type: 3}
-  sfxVolume: 0.5
-  sfx_Slider: {fileID: 100004226}
-  PitchCheck: 1
 --- !u!1 &2147004010
 GameObject:
   m_ObjectHideFlags: 0
@@ -26267,7 +26211,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2125166658}
+      - m_Target: {fileID: 1503039317700526789}
         m_TargetAssemblyTypeName: AudioManagers, Assembly-CSharp
         m_MethodName: ClickSound
         m_Mode: 1
@@ -26337,6 +26281,23 @@ GameObject:
   - component: {fileID: 3662848165918990099}
   m_Layer: 5
   m_Name: PanelGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &704987086059847982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8009765647104985403}
+  - component: {fileID: 1503039317700526789}
+  m_Layer: 0
+  m_Name: AudioManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26590,6 +26551,33 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\uC608"
+--- !u!114 &1503039317700526789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704987086059847982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b492c4cfa9a27b418cfe66c87cced9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmPlayer: {fileID: 1434574790}
+  bgmClip: {fileID: 8300000, guid: 723411c4e36400945ac80a0cf0f4fb75, type: 3}
+  bgmVolume: 0.3
+  bgm_Slider: {fileID: 1951339806}
+  sfxPlayer: {fileID: 1473492264}
+  sfxClip:
+  - {fileID: 8300000, guid: ee5464b6fdfb2234caee3bf393bcbf1d, type: 3}
+  - {fileID: 8300000, guid: 1e73584d1494c9c4a8b8f10ab211c002, type: 3}
+  - {fileID: 8300000, guid: 152db575c15c7254aaab9f889260e7d8, type: 3}
+  sfxVolume: 0.5
+  sfx_Slider: {fileID: 100004226}
+  sfxMonsterPlayer: {fileID: 0}
+  sfxMonsterNormal: []
+  sfxMonsterFollow: {fileID: 0}
+  PitchCheck: 1
 --- !u!222 &1637367633988640502
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27180,7 +27168,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2125166658}
+      - m_Target: {fileID: 1503039317700526789}
         m_TargetAssemblyTypeName: AudioManagers, Assembly-CSharp
         m_MethodName: ClickSound
         m_Mode: 1
@@ -28502,7 +28490,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2125166658}
+      - m_Target: {fileID: 1503039317700526789}
         m_TargetAssemblyTypeName: AudioManagers, Assembly-CSharp
         m_MethodName: ClickSound
         m_Mode: 1
@@ -28592,6 +28580,21 @@ RectTransform:
   m_AnchoredPosition: {x: 897.1962, y: 606.04224}
   m_SizeDelta: {x: 220.4086, y: 36.2492}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!4 &8009765647104985403
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704987086059847982}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.37992096, y: 0.4649849, z: 0.05942154}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8070415799149253292
 MonoBehaviour:
   m_ObjectHideFlags: 0

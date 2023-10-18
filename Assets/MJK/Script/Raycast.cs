@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Raycast : MonoBehaviour
 {
     public float range;
     public LayerMask interactedMask;
-
     public Inventory inventory;
+    ItemInteraction itemInteraction;
 
-    // Update is called once per frame
     void Update()
     {
         RaycastHit hit;
@@ -18,7 +18,7 @@ public class Raycast : MonoBehaviour
             OnRaycast or = hit.transform.gameObject.GetComponent<OnRaycast>();
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if(or.requirementItem != null)
+                if (or.requirementItem != null)
                 {
                     if (inventory.searchItem(or.requirementItem))
                     {
@@ -32,7 +32,6 @@ public class Raycast : MonoBehaviour
                     or.OnInteract();
                 }
             }
-        }
-        
+        }       
     }
 }
