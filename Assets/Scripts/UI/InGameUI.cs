@@ -38,8 +38,8 @@ public class InGameUI : MonoBehaviour
             }
         }
     }
-    public void LoadScene2()
+    public void LoadStartScene()
     {
-        LoadScene2("Start Scene");
+        SceneManager.LoadScene("StartScene");
     }
 }

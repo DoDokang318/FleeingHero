@@ -30,7 +30,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("Á×À½ ");
         IsGameOver = true;
         Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
         Youdie.SetActive(true);
+
     }
 
     public void PlayerSpqwn()
