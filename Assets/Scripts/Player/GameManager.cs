@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-       // PlayerSpqwn();
+      PlayerSpqwn();
     }
 
     public void Die(GameObject gameObject)

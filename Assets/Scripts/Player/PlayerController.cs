@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     GameObject FlashlightLight;
     bool FlashLightActive = false;
     [Header("Audio")]
-    public AudioManagers audioManagers;
+  
 
     public GameObject StaMinauiBar;
 
@@ -100,16 +100,16 @@ public class PlayerController : MonoBehaviour
             {
                 StaMinauiBar.SetActive(false);
 
-                if (!audioManagers.sfxPlayer.isPlaying && !isJumping)
+                if (!AudioManagers.I.sfxPlayer.isPlaying && !isJumping)
                 {
                     //이동만 하면 이동만 소리
-                    audioManagers.PlaySound(3);
+                    AudioManagers.I.PlaySound(3);
                 }
-                else if (!audioManagers.sfxPlayer.isPlaying && isJumping)
+                else if (!AudioManagers.I.sfxPlayer.isPlaying && isJumping)
                 {
                     //이동하면서 점프하면 둘다 소리
-                    audioManagers.PlaySound(3);
-                    audioManagers.PlaySound(4);
+                    AudioManagers.I.PlaySound(3);
+                    AudioManagers.I.PlaySound(4);
                 }
 
 
@@ -118,14 +118,14 @@ public class PlayerController : MonoBehaviour
         else if (!IsRun && !IsStamina)
         {
             dir *= 0;
-            if (audioManagers.sfxPlayer.isPlaying && !isJumping)
+            if (AudioManagers.I.sfxPlayer.isPlaying && !isJumping)
             {
                 //멈춤 상태에서 점프도 아니면 다 멈춤
-                audioManagers.sfxPlayer.Stop();
+                AudioManagers.I.sfxPlayer.Stop();
             }
-            else if (!audioManagers.sfxPlayer.isPlaying && isJumping)
+            else if (!AudioManagers.I.sfxPlayer.isPlaying && isJumping)
             {
-                audioManagers.PlaySound(4);
+                AudioManagers.I.PlaySound(4);
             }
         }
         dir.y = _rigidbody.velocity.y;

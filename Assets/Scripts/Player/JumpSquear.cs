@@ -26,6 +26,7 @@ public class JumpSquear : MonoBehaviour
         for (int i = 0; i < JumpSquearObj.Length; i++)
         {
             JumpSquearObj[i].SetActive(true);
+            AudioManagers.I.PlaySound(7);
         }
         
 
