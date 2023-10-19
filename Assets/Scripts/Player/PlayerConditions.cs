@@ -52,11 +52,12 @@ public class PlayerConditions : MonoBehaviour
     }
     void Update()
     {
-        var settings = HPParticle;
-        var main = settings.main;
 
 
-        
+      
+
+
+
         if (PlayerController.instance.IsRun==true)
         {           
             stamina.Subtract(stamina.decayRate * Time.deltaTime);
@@ -76,30 +77,37 @@ public class PlayerConditions : MonoBehaviour
             stamina.Add(stamina.regenRate * Time.deltaTime);
          
         }
+        HelthSystem();
 
-        if(health.curValue <= 70f&& health.curValue > 30f)
-        {
-            main.startColor = Color.yellow;
-        }
-        else if(health.curValue <= 30f && health.curValue > 0.0f)
-        {
-            main.startColor = Color.red;
-        }
-        else if (health.curValue <= 0.0f) 
-        {
-            main.startColor = Color.red;
-            Debug.Log(health.curValue);
-            GameManager.I.Die(this.gameObject);
-        }
-        else
-        {
-            Debug.Log(health.curValue);
-        }
+
         health.uiBar.fillAmount = health.GetPercentage();
         stamina.uiBar.fillAmount = stamina.GetPercentage();
     }
 
 
+    public void HelthSystem()
+    {
+        var settings = HPParticle;
+        var main = settings.main;
+        if (health.curValue <= 100f && health.curValue > 70f)
+        {
+            main.startColor = Color.green;
+        }
+        else if (health.curValue <= 70f && health.curValue > 30f)
+        {
+            main.startColor = Color.yellow;
+        }
+        else if (health.curValue <= 30f && health.curValue > 0.0f)
+        {
+            main.startColor = Color.red;
+        }
+        else if (health.curValue <= 0.0f)
+        {
+            main.startColor = Color.red;
+            Debug.Log(health.curValue);
+            GameManager.I.Die(this.gameObject);
+        }
+    }
 
     public void Heal(float amount)
     {
