@@ -108,9 +108,10 @@ public class Monster : MonoBehaviour
         Animator.SetBool("Attack", false);
         Animator.SetBool("Idle", false);
         Animator.SetBool("Walk", false);
-        audioManager.sfxMonsterPlayer.PlayOneShot(audioManager.sfxMonsterFollow);
+        audioManager.sfxMonsterPlayer.volume = 0.2f;
         audioManager.sfxMonsterPlayer.pitch = 1.5f;
         audioManager.sfxMonsterPlayer.spatialBlend = 0f;
+        audioManager.sfxMonsterPlayer.PlayOneShot(audioManager.sfxMonsterFollow);
         var curAnimStateInfo = Animator.GetCurrentAnimatorStateInfo(0);
 
         nmAgent.velocity = Vector3.zero;
@@ -231,9 +232,10 @@ public class Monster : MonoBehaviour
     IEnumerator SoundMonster()
     {
         audioManager.sfxMonsterPlayer.clip = audioManager.sfxMonsterNormal[Random.Range(0, audioManager.sfxMonsterNormal.Length)];
-        audioManager.sfxMonsterPlayer.Play();
         audioManager.sfxMonsterPlayer.spatialBlend = 1f;
         audioManager.sfxMonsterPlayer.pitch = 1f;
+        audioManager.sfxMonsterPlayer.volume = 1f;
+        audioManager.sfxMonsterPlayer.Play();
 
         yield return new WaitForSeconds(3f);
     }
