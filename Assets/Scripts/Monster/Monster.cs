@@ -108,9 +108,9 @@ public class Monster : MonoBehaviour
         Animator.SetBool("Attack", false);
         Animator.SetBool("Idle", false);
         Animator.SetBool("Walk", false);
-        //audioManager.sfxMonsterPlayer.PlayOneShot(audioManager.sfxMonsterFollow);
-        //audioManager.sfxMonsterPlayer.pitch = 1.5f;
-        //audioManager.sfxMonsterPlayer.spatialBlend = 0f;
+        audioManager.sfxMonsterPlayer.PlayOneShot(audioManager.sfxMonsterFollow);
+        audioManager.sfxMonsterPlayer.pitch = 1.5f;
+        audioManager.sfxMonsterPlayer.spatialBlend = 0f;
         var curAnimStateInfo = Animator.GetCurrentAnimatorStateInfo(0);
 
         nmAgent.velocity = Vector3.zero;
@@ -137,7 +137,7 @@ public class Monster : MonoBehaviour
             Animator.SetBool("Run", false);
             target = null;
             nmAgent.SetDestination(transform.position);
-            //audioManager.sfxMonsterPlayer.Stop();
+            audioManager.sfxMonsterPlayer.Stop();
             yield return null;
             // StateMachine 을 대기로 변경
             ChangeState(State.IDLE);
