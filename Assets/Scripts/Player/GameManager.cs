@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager I;
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject Spawn;
+    [SerializeField] private GameObject Youdie;
     private bool isgameOver;
     public bool IsGameOver { get { return isgameOver; } set { isgameOver = value; } }
 
@@ -28,6 +29,8 @@ public class GameManager : MonoBehaviour
         Destroy(gameObject);
         Debug.Log("Á×À½ ");
         IsGameOver = true;
+        Time.timeScale = 0f;
+        Youdie.SetActive(true);
     }
 
     public void PlayerSpqwn()

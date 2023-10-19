@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InGameUI : MonoBehaviour
 {
@@ -36,5 +37,9 @@ public class InGameUI : MonoBehaviour
                 //Debug.Log("2");
             }
         }
+    }
+    public void LoadScene2()
+    {
+        LoadScene2("Start Scene");
     }
 }
