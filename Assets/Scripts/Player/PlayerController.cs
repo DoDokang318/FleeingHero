@@ -63,10 +63,6 @@ public class PlayerController : MonoBehaviour
     {
         instance = this;
         _rigidbody = GetComponent<Rigidbody>();
-
-
-
-
     }
     void Start()
     {
@@ -91,6 +87,11 @@ public class PlayerController : MonoBehaviour
             {
                 StaMinauiBar.SetActive(true);
             }
+            if (!AudioManagers.I.sfxPlayer.isPlaying )
+            {
+                //이동만 하면 이동만 소리
+                AudioManagers.I.PlaySound(3);
+            }
         }
         else if (IsRun == false || IsStamina == false)
         {
@@ -100,17 +101,12 @@ public class PlayerController : MonoBehaviour
             {
                 StaMinauiBar.SetActive(false);
 
-                if (!AudioManagers.I.sfxPlayer.isPlaying && !isJumping)
+                if (!AudioManagers.I.sfxPlayer.isPlaying )
                 {
                     //이동만 하면 이동만 소리
                     AudioManagers.I.PlaySound(3);
                 }
-                else if (!AudioManagers.I.sfxPlayer.isPlaying && isJumping)
-                {
-                    //이동하면서 점프하면 둘다 소리
-                    AudioManagers.I.PlaySound(3);
-                    AudioManagers.I.PlaySound(4);
-                }
+              
 
 
             }
@@ -118,15 +114,7 @@ public class PlayerController : MonoBehaviour
         else if (!IsRun && !IsStamina)
         {
             dir *= 0;
-            if (AudioManagers.I.sfxPlayer.isPlaying && !isJumping)
-            {
-                //멈춤 상태에서 점프도 아니면 다 멈춤
-                AudioManagers.I.sfxPlayer.Stop();
-            }
-            else if (!AudioManagers.I.sfxPlayer.isPlaying && isJumping)
-            {
-                AudioManagers.I.PlaySound(4);
-            }
+               
         }
         dir.y = _rigidbody.velocity.y;
 
@@ -168,6 +156,7 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {
             IsRun = true;
+            
 
         }
         else if (context.phase == InputActionPhase.Canceled)
@@ -213,11 +202,13 @@ public class PlayerController : MonoBehaviour
         {
             if (FlashLightActive == false)
             {
+                AudioManagers.I.PlaySound(5);
                 FlashlightLight.gameObject.SetActive(true);
                 FlashLightActive = true;
             }
             else
             {
+                AudioManagers.I.PlaySound(6);
                 FlashlightLight.gameObject.SetActive(false);
                 FlashLightActive = false;
             }
@@ -232,7 +223,8 @@ public class PlayerController : MonoBehaviour
             {
                 _rigidbody.AddForce(Vector2.up * jumpForce, ForceMode.Impulse); // Impulse 는 질량을 가지고서 처이를 한다는 뜻이다 
                 isJumping = true;
-                //Debug.Log("점프 중" + isJumping);
+                AudioManagers.I.PlaySound(4);
+             
             }
         }
 
