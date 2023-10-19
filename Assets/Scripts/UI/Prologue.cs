@@ -114,7 +114,7 @@ public class Prologue : MonoBehaviour
         }
         yield return new WaitForSeconds(1.5f);
         audioManagers.PitchCheck = false;
-        LoadScene("Merge2");
+        LoadScene("Merge3");
         Destroy(prologueText.gameObject);
         Destroy(particle);
         Destroy(particle2);
@@ -128,8 +128,8 @@ public class Prologue : MonoBehaviour
         }
     }
 
-    public void LoadScene(string Merge2)
+    public void LoadScene(string Merge3)
     {
-        SceneManager.LoadScene(Merge2);
+        SceneManager.LoadScene(Merge3);
     }
 }
