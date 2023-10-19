@@ -105,7 +105,7 @@ MonoBehaviour:
   jumpForce: 80
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 39
   IsRun: 0
   IsStamina: 0
   SitTime: 0.2
@@ -6363,7 +6363,7 @@ Transform:
   - {fileID: 5978040419328659618}
   - {fileID: 4305278564434919522}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5296420088238363758
 MonoBehaviour:
