@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ItemTrigger : OnRaycast
 {
@@ -20,6 +21,7 @@ public class ItemTrigger : OnRaycast
 
         if (itemInteraction != null)
         {
+            itemInteraction.UpdateItemCount(); // 아이템을 획득할 때 아이템 카운트 업데이트
             itemInteraction.itemUIText.gameObject.SetActive(false);
         }
 
