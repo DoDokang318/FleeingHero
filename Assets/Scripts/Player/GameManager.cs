@@ -15,13 +15,14 @@ public class GameManager : MonoBehaviour
     
     private void Awake()
     {
+        PlayerSpqwn();
         I = this;       
        DontDestroyOnLoad(gameObject);
         
     }
     void Start()
     {
-       // PlayerSpqwn();
+       
     }
 
     public void Die(GameObject gameObject)

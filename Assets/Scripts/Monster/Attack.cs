@@ -45,7 +45,7 @@ public class Attack : MonoBehaviour
 
         if (targatCol.TryGetComponent(out PlayerConditions curValue))
         {
-            curValue.TakePhysicalDamage(10);
+            curValue.TakePhysicalDamage(50);
             Debug.Log(curValue.health.curValue+"ÇÇ°¨¼Ò");
             alreadyColliderWith.Remove(targatCol);
         }
