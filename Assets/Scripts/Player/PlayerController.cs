@@ -125,7 +125,6 @@ public class PlayerController : MonoBehaviour
             }
             else if(!audioManagers.sfxPlayer.isPlaying && isJumping)
             {
-
                 audioManagers.PlaySound(4);
             }
         }
@@ -233,11 +232,11 @@ public class PlayerController : MonoBehaviour
             {
                 _rigidbody.AddForce(Vector2.up * jumpForce, ForceMode.Impulse); // Impulse 는 질량을 가지고서 처이를 한다는 뜻이다 
                 isJumping = true;
+                Debug.Log("점프 중" + isJumping);
             }
         }
 
     }
-
 
     private bool IsGrounded()
     {
@@ -252,12 +251,15 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < rays.Length; i++)
         {
-            if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
+            if (Physics.Raycast(rays[i], 0.01f, groundLayerMask))
             {
+
                 return true;
             }
-        }
 
+        }
+        isJumping = false;
+        Debug.Log("착지" + isJumping);
         return false;
     }
 
