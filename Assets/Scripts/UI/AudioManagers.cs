@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -6,13 +7,7 @@ using UnityEngine.UI;
 
 public class AudioManagers : MonoBehaviour
 {
-
     public static AudioManagers I;
-    private void Awake()
-    {
-        I = this;
-        Init();
-    }
 
     [Header("#BGM")]
     //public Dropdown bgmDropdown;
@@ -26,6 +21,7 @@ public class AudioManagers : MonoBehaviour
     public AudioClip[] sfxClip;
     public float sfxVolume;
     public Slider sfx_Slider;
+    public GameObject spawn;
 
     [Header("MonsterAudio")]
     public AudioSource sfxMonsterPlayer;
@@ -33,7 +29,19 @@ public class AudioManagers : MonoBehaviour
     public AudioClip sfxMonsterFollow;
 
     public bool PitchCheck = true;
+    private void Start()
+    {
+        I = this;
+        Init();
+        //GameObject gamobj = GameObject.Find("Main Camera");
+        //bgmPlayer = gamobj.GetComponent<AudioSource>();
+        //sfxPlayer = gamobj.GetComponent<AudioSource>();
+        //sfxMonsterPlayer = gamobj.GetComponent<AudioSource>();
+        //Transform childObject = spawn.transform.Find("BgmSlider");
+        //bgm_Slider = childObject.GetComponent<Slider>();
+        //sfx_Slider = childObject2.GetComponent<Slider>();
 
+    }
     private void Init()
     {     
         

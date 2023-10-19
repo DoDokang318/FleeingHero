@@ -15,12 +15,12 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         I = this;       
-       DontDestroyOnLoad(gameObject);
-        
+        DontDestroyOnLoad(gameObject);
     }
-    void Start()
+
+    private void Start()
     {
-        PlayerSpqwn();
+        //PlayerSpqwn();
     }
 
     public void Die()
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerSpqwn()
     {
-        Instantiate(Player, Spawn.transform);
+        //Instantiate(Player, Spawn.transform);
     }
 
 

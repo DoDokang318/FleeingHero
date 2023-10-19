@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,9 +24,8 @@ public class PlayerController : MonoBehaviour
     public bool IsStamina;
      Vector3 startScale = new Vector3(1f, 0.5f, 1f); // 시작 스케일
      Vector3 endScale  = new Vector3(1f,1f,1f);   // 앉았을 때의 목표 스케일
-
     public float SitTime = 0.2f;
-
+    private bool isJumping = false;
 
     [Header("Look")]
 
@@ -53,7 +54,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject FlashlightLight;
     bool FlashLightActive = false;
-
+    [Header("Audio")]
+    public AudioManagers audioManagers;
 
     public GameObject StaMinauiBar;
 
@@ -68,8 +70,6 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
-
-        // animator = GetComponentInChildren<Animator>();
         FlashlightLight.gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked; //커서 없에기
     }
@@ -79,9 +79,6 @@ public class PlayerController : MonoBehaviour
     {
         Move();
     }
-
- 
-   
 
     private void Move()
     {
@@ -102,16 +99,40 @@ public class PlayerController : MonoBehaviour
             if (Math.Abs(dir.x) > 0.1 || Math.Abs(dir.z) > 0.1)
             {
                 StaMinauiBar.SetActive(false);
+                
+                if (!audioManagers.sfxPlayer.isPlaying && !isJumping)
+                {
+                    //이동만 하면 이동만 소리
+                    audioManagers.PlaySound(3);
+                }
+                else if (!audioManagers.sfxPlayer.isPlaying && isJumping)
+                {
+                    //이동하면서 점프하면 둘다 소리
+                    audioManagers.PlaySound(3);
+                    audioManagers.PlaySound(4);
+                }
+                
+
             }
         }
-        else
+        else if(!IsRun && !IsStamina)
         {
-            
+            dir *= 0;
+            if (audioManagers.sfxPlayer.isPlaying && !isJumping)
+            {
+                //멈춤 상태에서 점프도 아니면 다 멈춤
+                audioManagers.sfxPlayer.Stop();           
+            }
+            else if(!audioManagers.sfxPlayer.isPlaying && isJumping)
+            {
+
+                audioManagers.PlaySound(4);
+            }
         }
-      
         dir.y = _rigidbody.velocity.y;
 
         _rigidbody.velocity = dir;
+    
     }
 
     void CameraLook()
@@ -147,12 +168,14 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            IsRun = true;         
+            IsRun = true;
+
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             IsRun = false;          
         }
+
     }
     public void SitdownInput(InputAction.CallbackContext context)
     {
@@ -166,6 +189,7 @@ public class PlayerController : MonoBehaviour
             moveSpeed *= 2; // 이동 속도를 다시 복구하는 예
             StartCoroutine(ScaleOverTime(endScale, SitTime)); // 스케일을 startScale로 부드럽게 변경
         }
+
     }
 
     private IEnumerator ScaleOverTime(Vector3 targetScale, float duration)
@@ -206,10 +230,14 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Started)
         {
             if (IsGrounded())
+            {
                 _rigidbody.AddForce(Vector2.up * jumpForce, ForceMode.Impulse); // Impulse 는 질량을 가지고서 처이를 한다는 뜻이다 
-
+                isJumping = true;
+            }
         }
+
     }
+
 
     private bool IsGrounded()
     {
@@ -220,6 +248,7 @@ public class PlayerController : MonoBehaviour
             new Ray(transform.position + (transform.right * 0.2f) + (Vector3.up * 0.01f), Vector3.down),
             new Ray(transform.position + (-transform.right * 0.2f) + (Vector3.up * 0.01f), Vector3.down),
         };
+
 
         for (int i = 0; i < rays.Length; i++)
         {
