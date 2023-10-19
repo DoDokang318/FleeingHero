@@ -14,7 +14,7 @@ public class OffsetFlashlight : MonoBehaviour
 
 	void Update()
 	{
-		if(vectOffset != null)
+		if(goFollow != null)
         {
 			transform.position = goFollow.transform.position + vectOffset;
 			transform.rotation = Quaternion.Slerp(transform.rotation, goFollow.transform.rotation, speed * Time.deltaTime);
