@@ -24,7 +24,7 @@ public class InGameUI : MonoBehaviour
                 Time.timeScale = previousTimeScale;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.Locked;
-                //Debug.Log("1");
+                AudioManagers.I.PlaySound(1);
             }
             else
             {
@@ -34,7 +34,7 @@ public class InGameUI : MonoBehaviour
                 Time.timeScale = 0f; 
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-                //Debug.Log("2");
+                AudioManagers.I.PlaySound(1);
             }
         }
     }
