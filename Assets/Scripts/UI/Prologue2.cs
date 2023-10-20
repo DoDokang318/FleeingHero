@@ -9,8 +9,6 @@ public class Prologue2 : MonoBehaviour
 {
     private bool skipPrologue = false;
     public Text prologueText;
-    public CreateCharacter createCharacter;
-    public GameObject btn;
     private int fast;
     private void Start()
     {
@@ -29,104 +27,82 @@ public class Prologue2 : MonoBehaviour
 
     private IEnumerator PlayPrologue()
     {
-        string prologueMessage = "용사 " + CreateCharacter.characterId + "♥님, 일어나세요... ";
+        string prologueMessage = "뭐야 잘 자고 있었는데... 조금만 더 있었으면 공듀님을 구출할 수 있었는데 말이야. ";
 
         for (int i = 0; i < prologueMessage.Length; i++)
         {
-            //if (skipPrologue)
-            //{
-            //    break;
-            //}
-
             prologueText.text += prologueMessage[i];
             if (prologueMessage[i] != ' ' && prologueMessage[i] != ',')
             {
-
-                AudioManagers.I.PlaySound(0);
-
-
+                //AudioManagers.I.PlaySound(0);
             }
 
-            yield return new WaitForSeconds(fast == 0 ? 0.2f : fast == 1 ? 0.1f : 0.05f);
+            yield return new WaitForSeconds( 0.08f );
         }
         yield return new WaitForSeconds(0.5f);
         prologueText.text = "";
 
-        string prologueMessage2 = "(아 뭐야... 누구야 잘 자고 있었는데)";
+        string prologueMessage2 = "..............???";
 
         for (int i = 0; i < prologueMessage2.Length; i++)
         {
-            //if (skipPrologue)
-            //{
-            //    break;
-            //}
-
             prologueText.text += prologueMessage2[i];
             if (prologueMessage2[i] != ' ' && prologueMessage2[i] != ',' && prologueMessage2[i] != '(' && prologueMessage2[i] != ')')
             {
-                AudioManagers.I.PlaySound(0);
+                //AudioManagers.I.PlaySound(0);
             }
-            yield return new WaitForSeconds(fast == 0 ? 0.2f : fast == 1 ? 0.1f : 0.05f);
+            yield return new WaitForSeconds(0.1f);
+        }
+        yield return new WaitForSeconds(0.5f);
+        prologueText.text = "";
+
+        string prologueMessage3 = "뭐야...!? 여긴 어디야?? 뭐야 나 왜 이런곳에 있어?";
+
+        for (int i = 0; i < prologueMessage3.Length; i++)
+        {
+            prologueText.text += prologueMessage3[i];
+            if (prologueMessage3[i] != ' ' && prologueMessage3[i] != ',' )
+            {
+                //AudioManagers.I.PlaySound(0);
+            }
+            yield return new WaitForSeconds(0.1f);
         }
 
         yield return new WaitForSeconds(0.5f);
         prologueText.text = "";
 
-        string prologueMessage3 = CreateCharacter.characterId + "님의 손에, 저희 왕국의 미래가 달려있습니다.";
+        string prologueMessage4 = "어... 설마 저거 좀비야?? 홀리 쒯! 사람살려어어어어!!!";
 
-        for (int i = 0; i < prologueMessage3.Length; i++)
+        for (int i = 0; i < prologueMessage4.Length; i++)
         {
-            //if (skipPrologue)
-            //{
-            //    break;
-            //}
-
-            prologueText.text += prologueMessage3[i];
-            if (prologueMessage3[i] != ' ' && prologueMessage3[i] != ',')
+            prologueText.text += prologueMessage4[i];
+            if (prologueMessage4[i] != ' ' && prologueMessage4[i] != ',')
             {
-                AudioManagers.I.PlaySound(0);
+                //AudioManagers.I.PlaySound(0);
             }
-            yield return new WaitForSeconds(fast == 0 ? 0.2f : fast == 1 ? 0.1f : 0.05f);
+            yield return new WaitForSeconds(0.1f);
         }
 
         yield return new WaitForSeconds(1.0f);
         prologueText.text = "";
 
-        yield return new WaitForSeconds(0.5f);
-        string prologueMessage4 = "악의 무리들을 피해, 꼭 저를 구하러 와주세요!!!";
-        prologueText.color = Color.black;
-        for (int i = 0; i < prologueMessage4.Length; i++)
-        {
-            //if (skipPrologue)
-            //{
-            //    break;
-            //}
+        string prologueMessage5 = "(정신을 가다듬고, 열쇠를 찾아 방을 탈출해보도록 하자)";
 
-            prologueText.text += prologueMessage4[i];
-            if (prologueMessage4[i] != ' ' && prologueMessage4[i] != ',')
+        for (int i = 0; i < prologueMessage5.Length; i++)
+        {
+            prologueText.text += prologueMessage5[i];
+            if (prologueMessage5[i] != ' ' && prologueMessage5[i] != ',')
             {
-                AudioManagers.I.PlaySound(0);
+                //AudioManagers.I.PlaySound(0);
             }
-            yield return new WaitForSeconds(fast == 0 ? 0.2f : fast == 1 ? 0.1f : 0.05f);
+            yield return new WaitForSeconds(0.1f);
         }
-        yield return new WaitForSeconds(1.5f);
-        AudioManagers.I.PitchCheck = false;
-        LoadScene("Merge3");
-        Destroy(prologueText.gameObject);
 
-        Destroy(btn.gameObject);
-    }
-    public void ButtonFast()
-    {
-        if (fast >= 0 && fast <= 1)
-        {
-            fast += 1;
-        }
+        prologueText.text = "";
+
+
     }
 
-    public void LoadScene(string Merge3)
-    {
-        SceneManager.LoadScene(Merge3);
-    }
+
 
 }
