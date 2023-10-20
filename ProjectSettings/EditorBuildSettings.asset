@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Final/Merge2.unity
     guid: bf0bc0cb2681d9448acc4a82cdbb67ce
   - enabled: 1
-    path: Assets/Scenes/Final/Merge3.unity
+    path: Assets/Scenes/Final/Test/Merge3.unity
     guid: 78a4473cacde80947bcea98a4ed506c3
   - enabled: 1
     path: Assets/Scenes/StartScene.unity
