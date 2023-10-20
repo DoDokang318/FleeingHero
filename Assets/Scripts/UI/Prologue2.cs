@@ -5,13 +5,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.ParticleSystem;
 
-public class Prologue : MonoBehaviour
+public class Prologue2 : MonoBehaviour
 {
     private bool skipPrologue = false;
     public Text prologueText;
     public CreateCharacter createCharacter;
-    public ParticleSystem particle;
-    public ParticleSystem particle2;
     public GameObject btn;
     private int fast;
     private void Start()
@@ -93,7 +91,7 @@ public class Prologue : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
         prologueText.text = "";
-        particle.gameObject.SetActive(true);
+
         yield return new WaitForSeconds(0.5f);
         string prologueMessage4 = "악의 무리들을 피해, 꼭 저를 구하러 와주세요!!!";
         prologueText.color = Color.black;
@@ -115,8 +113,7 @@ public class Prologue : MonoBehaviour
         AudioManagers.I.PitchCheck = false;
         LoadScene("Merge3");
         Destroy(prologueText.gameObject);
-        Destroy(particle);
-        Destroy(particle2);
+
         Destroy(btn.gameObject);
     }
     public void ButtonFast()
