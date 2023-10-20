@@ -37,9 +37,9 @@ public class Prologue2 : MonoBehaviour
                 //AudioManagers.I.PlaySound(0);
             }
 
-            yield return new WaitForSeconds( 0.08f );
+            yield return new WaitForSeconds( 0.1f );
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         prologueText.text = "";
 
         string prologueMessage2 = "..............???";
@@ -53,7 +53,7 @@ public class Prologue2 : MonoBehaviour
             }
             yield return new WaitForSeconds(0.1f);
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         prologueText.text = "";
 
         string prologueMessage3 = "뭐야...!? 여긴 어디야?? 뭐야 나 왜 이런곳에 있어?";
@@ -68,7 +68,7 @@ public class Prologue2 : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         prologueText.text = "";
 
         string prologueMessage4 = "어... 설마 저거 좀비야?? 홀리 쒯! 사람살려어어어어!!!";
@@ -98,6 +98,7 @@ public class Prologue2 : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
+        yield return new WaitForSeconds(3.0f);
         prologueText.text = "";
 
 
