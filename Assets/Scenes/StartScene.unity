@@ -24389,7 +24389,10 @@ MonoBehaviour:
   sfxVolume: 0.5
   sfx_Slider: {fileID: 4172043221554672096}
   sfxMonsterPlayer: {fileID: 0}
-  sfxMonsterNormal: []
+  sfxMonsterNormal:
+  - {fileID: 8300000, guid: d74eb9be82b1e624890285a90028f6c9, type: 3}
+  - {fileID: 8300000, guid: 85e47ec469a7b834ebed35bbb9557ae6, type: 3}
+  - {fileID: 8300000, guid: 10a941f74ac59e945bc6ff87aa7b0dad, type: 3}
   sfxMonsterFollow: {fileID: 0}
   monsterVolume: 0
   monster_Slider: {fileID: 0}
