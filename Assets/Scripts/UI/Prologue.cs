@@ -9,7 +9,6 @@ public class Prologue : MonoBehaviour
 {
     private bool skipPrologue = false;
     public Text prologueText;
-    public AudioManagers audioManagers;
     public CreateCharacter createCharacter;
     public ParticleSystem particle;
     public ParticleSystem particle2;
@@ -18,7 +17,7 @@ public class Prologue : MonoBehaviour
     private void Start()
     {
         StartCoroutine(PlayPrologue());
-        audioManagers.PitchCheck = true;
+        AudioManagers.I.PitchCheck = true;
 
     }
 
@@ -45,7 +44,7 @@ public class Prologue : MonoBehaviour
             if (prologueMessage[i] != ' ' && prologueMessage[i] != ',')
             {
 
-                audioManagers.PlaySound(0);
+                AudioManagers.I.PlaySound(0);
 
 
             }
@@ -67,7 +66,7 @@ public class Prologue : MonoBehaviour
             prologueText.text += prologueMessage2[i];
             if (prologueMessage2[i] != ' ' && prologueMessage2[i] != ',' && prologueMessage2[i] != '(' && prologueMessage2[i] != ')')
             {
-                audioManagers.PlaySound(0);
+                AudioManagers.I.PlaySound(0);
             }
             yield return new WaitForSeconds(fast == 0 ? 0.2f : fast == 1 ? 0.1f : 0.05f);
         }
@@ -75,7 +74,7 @@ public class Prologue : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         prologueText.text = "";
 
-        string prologueMessage3 = CreateCharacter.characterId + "님의 손에, 저희 왕국의 미래가 달려있습니다";
+        string prologueMessage3 = CreateCharacter.characterId + "님의 손에, 저희 왕국의 미래가 달려있습니다.";
 
         for (int i = 0; i < prologueMessage3.Length; i++)
         {
@@ -87,7 +86,7 @@ public class Prologue : MonoBehaviour
             prologueText.text += prologueMessage3[i];
             if (prologueMessage3[i] != ' ' && prologueMessage3[i] != ',')
             {
-                audioManagers.PlaySound(0);
+                AudioManagers.I.PlaySound(0);
             }
             yield return new WaitForSeconds(fast == 0 ? 0.2f : fast == 1 ? 0.1f : 0.05f);
         }
@@ -108,12 +107,12 @@ public class Prologue : MonoBehaviour
             prologueText.text += prologueMessage4[i];
             if (prologueMessage4[i] != ' ' && prologueMessage4[i] != ',')
             {
-                audioManagers.PlaySound(0);
+                AudioManagers.I.PlaySound(0);
             }
             yield return new WaitForSeconds(fast == 0 ? 0.2f : fast == 1 ? 0.1f : 0.05f);
         }
         yield return new WaitForSeconds(1.5f);
-        audioManagers.PitchCheck = false;
+        AudioManagers.I.PitchCheck = false;
         LoadScene("Merge3");
         Destroy(prologueText.gameObject);
         Destroy(particle);

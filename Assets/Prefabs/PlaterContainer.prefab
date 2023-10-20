@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  RunSpeed: 5
+  RunSpeed: 3
   jumpForce: 80
   groundLayerMask:
     serializedVersion: 2
@@ -262,7 +262,7 @@ MonoBehaviour:
   health:
     curValue: 0
     maxValue: 100
-    startValue: 60
+    startValue: 100
     regenRate: 0
     decayRate: 0
     uiBar: {fileID: 2115124216091187269}
@@ -6124,7 +6124,7 @@ Transform:
   - {fileID: 5978040419328659618}
   - {fileID: 4305278564434919522}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5296420088238363758
 MonoBehaviour:
