@@ -3,7 +3,7 @@
 ## 시연 영상
 
 
-[![Video Label](https://www.youtube.com/watch?v=fgxZR39ozQo/1.jpg)](https://www.youtube.com/watch?v=fgxZR39ozQo)
+[![Video Label](http://img.youtube.com/vi/fgxZR39ozQo/1.jpg)](https://www.youtube.com/watch?v=fgxZR39ozQo)
 <br/>
 
 ## 팀원 / 담당 파트
