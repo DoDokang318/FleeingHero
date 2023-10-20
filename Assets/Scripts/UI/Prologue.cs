@@ -13,6 +13,7 @@ public class Prologue : MonoBehaviour
     public ParticleSystem particle;
     public ParticleSystem particle2;
     public GameObject btn;
+    public GameObject Canvas;
     private int fast;
     private void Start()
     {
@@ -118,6 +119,7 @@ public class Prologue : MonoBehaviour
         Destroy(particle);
         Destroy(particle2);
         Destroy(btn.gameObject);
+        Destroy(Canvas);
     }
     public void ButtonFast()
     {

@@ -21782,11 +21782,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prologueText: {fileID: 996283521}
-  audioManagers: {fileID: 1503039317700526789}
   createCharacter: {fileID: 0}
   particle: {fileID: 491049491}
   particle2: {fileID: 1227684524}
   btn: {fileID: 118555369}
+  Canvas: {fileID: 1368254447}
 --- !u!212 &1609846396
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -24391,6 +24391,8 @@ MonoBehaviour:
   sfxMonsterPlayer: {fileID: 0}
   sfxMonsterNormal: []
   sfxMonsterFollow: {fileID: 0}
+  monsterVolume: 0
+  monster_Slider: {fileID: 0}
   PitchCheck: 1
 --- !u!222 &1514958380239716620
 CanvasRenderer:
