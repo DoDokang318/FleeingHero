@@ -45375,8 +45375,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 85e47ec469a7b834ebed35bbb9557ae6, type: 3}
   - {fileID: 8300000, guid: 10a941f74ac59e945bc6ff87aa7b0dad, type: 3}
   sfxMonsterFollow: {fileID: 8300000, guid: ee403a3067a0c476dbd3e34a5f69c4a3, type: 3}
-  monsterVolume: 0
-  monster_Slider: {fileID: 0}
+  monsterVolume: 0.5
+  monster_Slider: {fileID: 60795712}
   PitchCheck: 1
 --- !u!114 &4407572371527025468
 MonoBehaviour:
