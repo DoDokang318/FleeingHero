@@ -848,7 +848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &60795710
 RectTransform:
   m_ObjectHideFlags: 0
@@ -967,7 +967,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4317844622344521408}
         m_TargetAssemblyTypeName: AudioManagers, Assembly-CSharp
-        m_MethodName: SetsfxVolume
+        m_MethodName: SetMusicVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -50702,6 +50702,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 85e47ec469a7b834ebed35bbb9557ae6, type: 3}
   - {fileID: 8300000, guid: 10a941f74ac59e945bc6ff87aa7b0dad, type: 3}
   sfxMonsterFollow: {fileID: 8300000, guid: ee403a3067a0c476dbd3e34a5f69c4a3, type: 3}
+  monsterVolume: 0
+  monster_Slider: {fileID: 0}
   PitchCheck: 1
 --- !u!114 &4407572371527025468
 MonoBehaviour:

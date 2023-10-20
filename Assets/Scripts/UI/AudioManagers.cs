@@ -31,6 +31,8 @@ public class AudioManagers : MonoBehaviour
     public AudioSource sfxMonsterPlayer;
     public AudioClip[] sfxMonsterNormal;
     public AudioClip sfxMonsterFollow;
+    public float monsterVolume;
+    public Slider monster_Slider;
 
     public bool PitchCheck = true;
 
@@ -41,6 +43,7 @@ public class AudioManagers : MonoBehaviour
         bgmPlayer.clip = bgmClip;
 
         sfxPlayer.volume = sfxVolume;
+        sfxMonsterPlayer.volume = monsterVolume;
     }
 
     public void SetMusicVolume(float volume)
@@ -51,6 +54,10 @@ public class AudioManagers : MonoBehaviour
     public void SetsfxVolume(float volume)
     {
         sfxPlayer.volume = volume;
+    }
+    public void SetMonsterVolume(float volume)
+    {
+        sfxMonsterPlayer.volume = volume;
     }
 
     public void PlaySound(int index)
